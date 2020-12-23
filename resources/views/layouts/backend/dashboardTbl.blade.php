@@ -1,6 +1,6 @@
-
+{{-- 
 @php $i=0; @endphp
-@foreach ($levels as $level)
+
 @php $i++; @endphp
 
 <tr id="defaultRow" role="row" >
@@ -31,7 +31,7 @@
         {{-- <button onclick="deleteLevel({{ $level->id }})" class="btn btn-danger btn-sm">
             <i class="fa fa-trash"></i>
         </button> --}}
-        <button id="update_btn_e{{$level->id}}" onclick="updateLevel({{ $level->id }})" class="btn btn-success btn-sm" style="margin-right: 5px;display:none;">
+        {{-- <button id="update_btn_e{{$level->id}}" onclick="updateLevel({{ $level->id }})" class="btn btn-success btn-sm" style="margin-right: 5px;display:none;">
             <i class="fa fa-check"></i>
         </button>
         <button id="undo_btn_d{{$level->id}}" onclick="closeEdit({{ $level->id }})" class="btn btn-danger btn-sm" style="margin-right: 5px;display:none;">
@@ -39,4 +39,4 @@
         </button>
     </td>
 </tr>
-@endforeach
+@endforeach --}} --}}

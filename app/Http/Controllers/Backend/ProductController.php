@@ -99,7 +99,7 @@ class ProductController extends Controller
                 'slug'=> Str::slug($request->product_name),
                 'product_code'=>$request->product_code,
                 'color'=>$request->color,
-                'e_money'=>$request->e_money,
+                'position'=>$request->position,
                 'indoor_charge'=>$request->indoor_charge,
                 'outdoor_charge'=>$request->outdoor_charge,
                 'description'=>$request->description,
@@ -168,7 +168,7 @@ class ProductController extends Controller
             'slug'=> Str::slug($request->product_name),
             'product_code'=>$request->product_code,
             'color'=>$request->color,
-            'e_money'=>$request->e_money,
+            'position'=>$request->position,
             'indoor_charge'=>$request->indoor_charge,
             'outdoor_charge'=>$request->outdoor_charge,
             'description'=>$request->description

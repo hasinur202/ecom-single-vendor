@@ -84,42 +84,42 @@
                         @csrf
                         <div class="card-body row col-12">
                             <div class="row col-12">
-                            <div class="form-group col-3">
-                                <label class="mr-sm-2" for="inlineFormCustomSelect">Category</label>
-                                <input id="cat" type="text" class="form-control"
-                                placeholder="Enter category name" readonly required/>
-                                <input type="hidden" id="get_category_id" name="category_id" value="">
-                            </div>
-                            <div class="form-group col-3">
-                                <label class="mr-sm-2" for="inlineFormCustomSelect">ChildCategory</label>
-                                <input id="child" type="text" class="form-control"
-                                placeholder="Enter child name" readonly required/>
-                                <input type="hidden" id="get_child_category_id" name="child_category_id" value="">
+                                <div class="form-group col-3">
+                                    <label class="mr-sm-2" for="inlineFormCustomSelect">Category</label>
+                                    <input id="cat" type="text" class="form-control"
+                                    placeholder="Enter category name" readonly required/>
+                                    <input type="hidden" id="get_category_id" name="category_id" value="">
+                                </div>
+                                <div class="form-group col-3">
+                                    <label class="mr-sm-2" for="inlineFormCustomSelect">ChildCategory</label>
+                                    <input id="child" type="text" class="form-control"
+                                    placeholder="Enter child name" readonly required/>
+                                    <input type="hidden" id="get_child_category_id" name="child_category_id" value="">
 
+                                </div>
+                                <div class="form-group col-3">
+                                    <label class="mr-sm-2" for="inlineFormCustomSelect">Select Child ChildCategory</label>
+                                    <select onchange="subChildId()" class="form-control" name="sub_child_category_id" id="sub_child_category_id">
+                                        <option value="" hidden selected="selected">select</option>
+                                        @foreach ($sub_childs as $sub_child)
+                                            <option value="{{ $sub_child->id }}">
+                                                {{ $sub_child->sub_child_name }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="form-group col-3">
+                                    <label class="mr-sm-2" for="inlineFormCustomSelect">Select Brand</label>
+                                    <select class="form-control" onclick="getId()" name="brand_id" id="brand_id">
+                                        <option value="" selected="selected" hidden>select brand name</option>
+                                        @foreach ($brands as $brand)
+                                            <option value="{{ $brand->id }}">
+                                                {{ $brand->brand_name }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
                             </div>
-                            <div class="form-group col-3">
-                                <label class="mr-sm-2" for="inlineFormCustomSelect">Select Child ChildCategory</label>
-                                <select onchange="subChildId()" class="form-control" name="sub_child_category_id" id="sub_child_category_id">
-                                    <option value="" hidden selected="selected">select</option>
-                                    @foreach ($sub_childs as $sub_child)
-                                        <option value="{{ $sub_child->id }}">
-                                            {{ $sub_child->sub_child_name }}
-                                        </option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div class="form-group col-3">
-                                <label class="mr-sm-2" for="inlineFormCustomSelect">Select Brand</label>
-                                <select class="form-control" onclick="getId()" name="brand_id" id="brand_id">
-                                    <option value="" selected="selected" hidden>select brand name</option>
-                                    @foreach ($brands as $brand)
-                                        <option value="{{ $brand->id }}">
-                                            {{ $brand->brand_name }}
-                                        </option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
                             <div class="row col-12">
                                 <div class="form-group col-3">
                                     <label class="mr-sm-2" for="inlineFormCustomSelect">Product Name</label>
@@ -138,17 +138,15 @@
                                 </div>
                                 <div class="form-group col-3">
                                     <label class="mr-sm-2" for="inlineFormCustomSelect"
-                                        >E-Money</label
-                                        >
-                                    <input
-                                        id="e_money"
-                                        name="e_money"
-                                        type="number"
-                                        min="0" 
-                                        step="any"
-                                        class="form-control"
-                                        placeholder="0.00%"
-                                    />
+                                    >Select Position</label
+                                    >
+                                    <select class="form-control" name="position" id="position">
+                                        <option value="flash sale">flash sale</option>
+                                        <option value="upcoming product">upcoming product</option>
+                                        <option value="just for you">just for you</option>
+                                        <option value="own mall">own mall</option>
+                                        <option value="global product">global product</option>
+                                    </select>
                                 </div>
                             </div>
                             <div class="form-group row col-12">
@@ -208,15 +206,14 @@
                             <form id="avatarUpload" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 <div class="form-group col-12">
-                                    <label class="mr-sm-2" for="inlineFormCustomSelect">Select Product</label>
-                                    <select class="form-control" onclick="getId()" name="prod_name" id="prod_name">
-                                        <option value="" selected="selected" hidden>select product name</option>
-                                        @foreach ($products as $product)
-                                            <option value="{{ $product->id }}">
-                                                {{ $product->product_name }}
-                                            </option>
-                                        @endforeach
-                                    </select>
+                                    <label class="mr-sm-2" for="inlineFormCustomSelect">Product Name</label>
+                                    <input
+                                        readonly
+                                        id="pro_name"
+                                        type="text"
+                                        class="form-control"
+                                    />
+                                    <input type="hidden" name="id" id="pro_id">
                                 </div>
                                 <input style="display:none;border: none;
                                     width: 22%;
@@ -541,7 +538,7 @@
                     cache: false,
                     processData: false,
                     success: function(response) {
-
+                        window.location.reload();
                         document.getElementById("product_table").style.display = "block";
                         document.getElementById("addProductForm").style.display = "none";
                         Toast.fire({
@@ -584,7 +581,9 @@
             document.getElementById("productAvatarInfo").style.display = "none";
         }
 
-        function addProductAvatar() {
+        function addProductAvatar(pro,id) {
+            $("#pro_name").val(pro);
+            $("#pro_id").val(id);
             document.getElementById("addProductForm").style.display = "block";
             document.getElementById("product_table").style.display = "none";
             document.getElementById("productInfo").style.display = "none";

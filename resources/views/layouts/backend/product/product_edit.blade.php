@@ -124,18 +124,15 @@
                         </div>
                         <div class="form-group col-3">
                             <label class="mr-sm-2" for="inlineFormCustomSelect"
-                                >E-Money</label
-                                >
-                            <input
-                                value="{{$product->e_money}}"
-                                id="e_money"
-                                name="e_money"
-                                type="number"
-                                min="0" 
-                                step="any"
-                                class="form-control"
-                                placeholder="0.00%"
-                            />
+                            >Select Position</label
+                            >
+                            <select class="form-control" name="position" id="position">
+                                <option value="flash sale">flash sale</option>
+                                <option value="upcoming product">upcoming product</option>
+                                <option value="just for you">just for you</option>
+                                <option value="own mall">own mall</option>
+                                <option value="global product">global product</option>
+                            </select>
                         </div>
                     </div>
                     <div class="form-group row col-12">

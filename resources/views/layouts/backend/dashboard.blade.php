@@ -6,25 +6,7 @@
     <section class="content-header">
       <div class="container-fluid">
         <div class="row mb-2">
-            <div class="col-sm-3">
-                <div id="disableDiv" style="width: 100%;
-                    padding: 5px;
-                    background-color: white;
-                    border: 1px solid #ddd;
-                    box-shadow: 1px 1px #ddd;
-                    border-radius: 5px;display: inline-flex;">
-                    <button class="btn btn-primary" onclick="addlevel()" style="padding: 10px;">
-                        <i style="margin-right: 5px;font-size: 25px;margin-left: 5px;" class="fa fa-plus"
-                            style="margin-right: 5px;"></i>
-                    </button>
-                    <p style="margin-left: 5px;
-                    font-weight: 700;
-                    margin-bottom: 0px;">Add Share Holder Level
-                        <span style="float: left;
-                    margin-left: 15px;" class="badge badge-warning">0/0</span>
-                    </p>
-                </div>
-            </div>
+            
             <div class="col-sm-2">
                 <div id="disableDiv" style="width: 100%;
                     padding: 5px;
@@ -56,7 +38,7 @@
             <div class="card card-primary col-4" style="margin-left: 15px; padding-top: 8px;">
                 <div class="card-header" style="background-color: #007bff;
                 color: #fff;">
-                  <h3 class="card-title">Add Share Holder level</h3>
+                  <h3 class="card-title">Any thing</h3>
                   <button
                     type="button"
                     class="close"
@@ -123,7 +105,7 @@
             </div>
             <div class="card col-7" style="margin-left: 70px;">
                 <div class="card-header">
-                <h3 class="card-title">Share Holder level table</h3>
+                <h3 class="card-title">Any Thing</h3>
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
@@ -149,7 +131,7 @@
         <div id="defaultMode">
         <div class="card col-lg-5">
             <div class="card-header">
-              <h3 class="card-title">ShareHolder Level Info</h3>
+              <h3 class="card-title">Any Thing....</h3>
               <div class="card-tools">
                 <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
                 </button>
@@ -162,7 +144,7 @@
                   <a href="#" class="nav-link">
                     Level #
                     <span class="float-right text-danger">
-                      ShareHolder Qty</span>
+                      Qty</span>
                   </a>
                 </li>
 
@@ -170,25 +152,24 @@
                 <li class="nav-item" style="background:#ddd">
                     <a href="#" class="nav-link">
                       Level - 0
-                      <span class="float-right text-danger">{{ $zeroLevelsCount }}</span>
+                      <span class="float-right text-danger">0</span>
                     </a>
                   </li>
 
 
-                  @foreach($level_wise_holder as $level_holders)
+                  
                   <li class="nav-item">
                     <a href="#" class="nav-link">
-                      Level - {{ $level_holders->cycle_no }}
+                      Level - 0
 
-                      @php $i=0; @endphp
+                      {{-- @php $i=0; @endphp
                       @foreach ($level_holders->get_share_holders as $share_holder_qty)
                       @php $i++; @endphp
 
-                      @endforeach
-                      <span class="float-right text-success">{{ $i }}</span>
+                      @endforeach --}}
+                      <span class="float-right text-success">0</span>
                     </a>
                   </li>
-                  @endforeach
 
               </ul>
             </div>
@@ -278,121 +259,6 @@
                 "autoWidth": false,
             });
         });
-        function addlevel(){
-            $("#showLevel").show();
-            $("#defaultMode").hide();
-        }
-
-        function editLevel(id){
-          $("#cycle_value_n"+id).hide();
-          $("#edit_cycle_value"+id).show();
-          $("#cycle_emoney_n"+id).hide();
-          $("#edit_cycle_emoney"+id).show();
-          $("#cycle_commision_n"+id).hide();
-          $("#edit_commision"+id).show();
-          $("#edit_btn_n"+id).hide();
-          $("#update_btn_e"+id).show();
-          $("#undo_btn_d"+id).show();
-        }
-
-        function closeEdit(id){
-          $("#cycle_value_n"+id).show();
-          $("#edit_cycle_value"+id).hide();
-          $("#cycle_emoney_n"+id).show();
-          $("#edit_cycle_emoney"+id).hide();
-          $("#cycle_commision_n"+id).show();
-          $("#edit_commision"+id).hide();
-          $("#edit_btn_n"+id).show();
-          $("#update_btn_e"+id).hide();
-          $("#undo_btn_d"+id).hide();
-        }
-
-        function storeLevel(){
-            $.ajax({
-                url:"{{ route('level.store') }}",
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-                method:"POST",
-                dataType:"html",
-                data:{
-                    'cycle_no':$("#cycle_no").val(),
-                    'cycle_value':$("#cycle_value").val(),
-                    'e_money':$("#e_money").val(),
-                    'commision':$("#commision").val(),
-                },
-                success: function(response) {
-                    $("#tbl").html(response);
-
-                    $("#cycle_no").val('');
-                    $("#cycle_value").val('');
-                    $("#e_money").val('');
-                    $("#commision").val('');
-                },
-                error: function() {
-                  Swal.fire({
-                      icon: 'error',
-                      title: 'Oops...',
-                      text: 'Wrong data entry.'
-                  })
-
-                }
-            })
-        }
-
-/*
-        function deleteLevel(id){
-            $.ajax({
-                url:"{{ route('level.delete') }}",
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-                method:"POST",
-                dataType:"html",
-                data:{
-                    'id':id,
-                },
-                success: function(response) {
-                    $("#tbl").html(response);
-                },
-                error: function() {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Opps!',
-                        text:'Something Went Wrong.'
-                    })
-                }
-            })
-        }
-*/
-
-        function updateLevel(id){
-            $.ajax({
-                url:"{{ route('level.update') }}",
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-                method:"POST",
-                dataType:"html",
-                data:{
-                    'edit_cycle_value':$("#edit_cycle_value"+id).val(),
-                    'edit_e_money':$("#edit_cycle_emoney"+id).val(),
-                    'edit_commision':$("#edit_commision"+id).val(),
-                    'id':id
-                },
-                success: function(response) {
-                    $("#tbl").html(response);
-
-                },
-                error: function() {
-                  Swal.fire({
-                      icon: 'error',
-                      title: 'Oops...',
-                      text: 'Wrong data entry.'
-                  })
-                }
-            })
-        }
     </script>
 @endsection
 @endsection
