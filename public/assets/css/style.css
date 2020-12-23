@@ -7580,3 +7580,15 @@ screen and (max-height: 300px) {
     border-radius: 5px;
     color: #fff;
 }
+
+.btn_outline {
+    padding: 7px 15px;
+    background: #fff;
+    color: #333;
+    border: 1px solid #ddd;
+}
+
+.btn_outline:hover {
+    color: #fff;
+    background: rgb(84, 167, 84);
+}

@@ -69,7 +69,7 @@
         <div class="owl-carousel owl-theme products_carousel">
             @foreach ($products as $product)
             @if ($product->position == "flash sale")
-                
+
                 <div class="item">
                     <div class="grid_item">
                         @foreach ($product->get_product_avatars as $avtr)
@@ -105,7 +105,7 @@
             <div class="col-lg-6">
                 <a href="#">
                     <figure>
-                        <img src="/assets/img/blog-thumb-placeholder.jpg" data-src="images/649374269.jpg" alt="" width="600" height="160" class="lazy">
+                        <img class="lazy img_ad_banner" src="/assets/img/blog-thumb-placeholder.jpg" data-src="images/612670428.jpg" alt="">
                     </figure>
                 </a>
             </div>
@@ -113,11 +113,81 @@
             <div class="col-lg-6">
                 <a href="#">
                     <figure>
-                        <img src="/assets/img/blog-thumb-placeholder.jpg" data-src="images/2130407414.jpg" alt="" width="600" height="160" class="lazy">
+                        <img class="lazy img_ad_banner" src="/assets/img/blog-thumb-placeholder.jpg" data-src="images/2130407414.jpg" alt="">
 
                     </figure>
                 </a>
             </div>
+        </div>
+    </div>
+
+    <div class="container" style="margin-bottom: 0rem">
+        <div class="main_title">
+            <h2>Explore Popular Categories</h2>
+        </div>
+        <div class="row">
+            <div class="col-6 col-sm-8 col-lg-3" style="margin-bottom: 5px;">
+                <a target="_blank" href="#" class="icon-box icon-box-side">
+                <div style="border: 1px solid #ddd; width:105%; padding-top:.3rem !important; padding-bottom: .3rem !important;">
+                    <img style="width: 35px !important; margin-right:10px;margin-left:20px;
+                    height: 30px !important;" src="https://jinershop.com/images/598180269.png" alt="">
+                    <span>Sports &amp; Outdoor</span>
+
+                </div>
+                </a>
+            </div>
+            <div class="col-6 col-sm-8 col-lg-3" style="margin-bottom: 5px;">
+                <a target="_blank" href="#" class="icon-box icon-box-side">
+                <div style="border: 1px solid #ddd; width:105%; padding-top:.3rem !important; padding-bottom: .3rem !important;">
+                    <img style="width: 35px !important; margin-right:10px;margin-left:20px;
+                    height: 30px !important;" src="https://jinershop.com/images/598180269.png" alt="">
+                    <span>Sports &amp; Outdoor</span>
+
+                </div>
+                </a>
+            </div>
+            <div class="col-6 col-sm-8 col-lg-3" style="margin-bottom: 5px;">
+                <a target="_blank" href="#" class="icon-box icon-box-side">
+                <div style="border: 1px solid #ddd; width:105%; padding-top:.3rem !important; padding-bottom: .3rem !important;">
+                    <img style="width: 35px !important; margin-right:10px;margin-left:20px;
+                    height: 30px !important;" src="https://jinershop.com/images/598180269.png" alt="">
+                    <span>Sports &amp; Outdoor</span>
+
+                </div>
+                </a>
+            </div>
+            <div class="col-6 col-sm-8 col-lg-3" style="margin-bottom: 5px;">
+                <a target="_blank" href="#" class="icon-box icon-box-side">
+                <div style="border: 1px solid #ddd; width:105%; padding-top:.3rem !important; padding-bottom: .3rem !important;">
+                    <img style="width: 35px !important; margin-right:10px;margin-left:20px;
+                    height: 30px !important;" src="https://jinershop.com/images/598180269.png" alt="">
+                    <span>Sports &amp; Outdoor</span>
+
+                </div>
+                </a>
+            </div>
+            <div class="col-6 col-sm-8 col-lg-3" style="margin-bottom: 5px;">
+                <a target="_blank" href="#" class="icon-box icon-box-side">
+                <div style="border: 1px solid #ddd; width:105%; padding-top:.3rem !important; padding-bottom: .3rem !important;">
+                    <img style="width: 35px !important; margin-right:10px;margin-left:20px;
+                    height: 30px !important;" src="https://jinershop.com/images/598180269.png" alt="">
+                    <span>Sports &amp; Outdoor</span>
+
+                </div>
+                </a>
+            </div>
+            <div class="col-6 col-sm-8 col-lg-3" style="margin-bottom: 5px;">
+                <a target="_blank" href="#" class="icon-box icon-box-side">
+                <div style="border: 1px solid #ddd; width:105%; padding-top:.3rem !important; padding-bottom: .3rem !important;">
+                    <img style="width: 35px !important; margin-right:10px;margin-left:20px;
+                    height: 30px !important;" src="https://jinershop.com/images/598180269.png" alt="">
+                    <span>Sports &amp; Outdoor</span>
+
+                </div>
+                </a>
+            </div>
+
+
         </div>
     </div>
 
@@ -126,6 +196,9 @@
         <div class="main_title">
             <h2>Idea Tech Mall</h2>
             <span>Products</span>
+            <div style="text-align: right;">
+                <a href="#" class="btn_outline">Shop More</a>
+            </div>
         </div>
         <div class="row small-gutters">
             @foreach ($products as $product)
@@ -164,57 +237,13 @@
     </div>
 
 
-
-
-    <div class="container margin_60_35" style="padding-bottom:10px !important;">
-        <div class="main_title">
-            <h2>Just For You</h2>
-            <span>Products</span>
-        </div>
-        <div class="row small-gutters">
-            @foreach ($products as $product)
-            @if ($product->position == "just for you")
-            <div class="col-6 col-md-4 col-xl-2">
-                <div class="grid_item">
-                    @foreach ($product->get_product_avatars as $avtr)
-                    <figure>
-                        <a href="product-detail-1.html">
-                            <img style="    height: 200px !important;
-                            width: 100% !important;" class="img-fluid lazy" src="{{asset('/images/'.$avtr->front)}}" data-src="{{asset('/images/'.$avtr->front)}}" alt="">
-                            <img style="    height: 200px !important;
-                            width: 100% !important;" class="img-fluid lazy" src="{{asset('/images/'.$avtr->front)}}" data-src="{{asset('/images/'.$avtr->front)}}" alt="">
-                        </a>
-                    </figure>
-                    @endforeach
-                    <div class="rating"><i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star"></i></div>
-                    <a href="product-detail-1.html">
-                        <h3>{{$product->product_name}}</h3>
-                    </a>
-                    <div class="price_box">
-                        @foreach ($product->get_attribute->unique('product_id') as $attr)
-                            <span class="new_price">{{$attr->sale_price}}</span>
-                            <span class="old_price">{{$attr->promo_price}}</span>
-                        @endforeach
-                    </div>
-                    <ul>
-                        <li><a href="#0" onclick="addWishList({{$product}})" class="tooltip-1" data-toggle="tooltip" data-placement="left" title="Add to favorites"><i class="ti-heart"></i><span>Add to favorites</span></a></li>
-                        <li><a href="#0" onclick="addToCart({{$product}})" class="tooltip-1" data-toggle="tooltip" data-placement="left" title="Add to cart"><i class="ti-shopping-cart"></i><span>Add to cart</span></a></li>
-                    </ul>
-                </div>
-            </div>
-            @endif
-            @endforeach
-        </div>
-        <div style="text-align: center;">
-            <a href="#" class="btn_1">Load More</a>
-
-        </div>
-    </div>
-
     <div class="container margin_60_35">
         <div class="main_title">
-            <h2>Upcoming Products</h2>
+            <h2>Upcoming</h2>
             <span>Products</span>
+            <div style="text-align: right;">
+                <a href="#" class="btn_outline">Shop More</a>
+            </div>
         </div>
         <div class="row small-gutters">
             @foreach ($products as $product)
@@ -250,20 +279,82 @@
             @endif
             @endforeach
         </div>
-        <div style="text-align: center;">
-            <a href="#" class="btn_1">Load More</a>
+    </div>
 
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6">
+                <a href="#">
+                    <figure>
+                        <img src="/assets/img/blog-thumb-placeholder.jpg" data-src="images/649374269.jpg" alt="" width="600" height="160" class="lazy img_ad_banner">
+                    </figure>
+                </a>
+            </div>
+            <!-- /box_news -->
+            <div class="col-lg-6">
+                <a href="#">
+                    <figure>
+                        <img src="/assets/img/blog-thumb-placeholder.jpg" data-src="images/2130407414.jpg" alt="" width="600" height="160" class="lazy img_ad_banner">
+
+                    </figure>
+                </a>
+            </div>
         </div>
     </div>
 
     <div class="container margin_60_35">
         <div class="main_title">
-            <h2>Global Products</h2>
+            <h2>Global</h2>
             <span>Products</span>
+            <div style="text-align: right;">
+                <a href="#" class="btn_outline">Shop More</a>
+            </div>
         </div>
         <div class="row small-gutters">
             @foreach ($products as $product)
             @if ($product->position == "global product")
+            <div class="col-6 col-md-4 col-xl-2">
+                <div class="grid_item">
+                    @foreach ($product->get_product_avatars as $avtr)
+                    <figure>
+                        <a href="product-detail-1.html">
+                            <img style="    height: 200px !important;
+                            width: 100% !important;" class="img-fluid lazy" src="{{asset('/images/'.$avtr->front)}}" data-src="{{asset('/images/'.$avtr->front)}}" alt="">
+                            <img style="    height: 200px !important;
+                            width: 100% !important;" class="img-fluid lazy" src="{{asset('/images/'.$avtr->front)}}" data-src="{{asset('/images/'.$avtr->front)}}" alt="">
+                        </a>
+                    </figure>
+                    @endforeach
+                    <div class="rating"><i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star"></i></div>
+                    <a href="product-detail-1.html">
+                        <h3>{{$product->product_name}}</h3>
+                    </a>
+                    <div class="price_box">
+                        @foreach ($product->get_attribute->unique('product_id') as $attr)
+                            <span class="new_price">{{$attr->sale_price}}</span>
+                            <span class="old_price">{{$attr->promo_price}}</span>
+                        @endforeach
+                    </div>
+                    <ul>
+                        <li><a href="#0" onclick="addWishList({{$product}})" class="tooltip-1" data-toggle="tooltip" data-placement="left" title="Add to favorites"><i class="ti-heart"></i><span>Add to favorites</span></a></li>
+                        <li><a href="#0" onclick="addToCart({{$product}})" class="tooltip-1" data-toggle="tooltip" data-placement="left" title="Add to cart"><i class="ti-shopping-cart"></i><span>Add to cart</span></a></li>
+                    </ul>
+                </div>
+            </div>
+            @endif
+            @endforeach
+        </div>
+    </div>
+
+
+    <div class="container margin_60_35" style="padding-bottom:10px !important;">
+        <div class="main_title">
+            <h2>Just For You</h2>
+            <span>Products</span>
+        </div>
+        <div class="row small-gutters">
+            @foreach ($products as $product)
+            @if ($product->position == "just for you")
             <div class="col-6 col-md-4 col-xl-2">
                 <div class="grid_item">
                     @foreach ($product->get_product_avatars as $avtr)

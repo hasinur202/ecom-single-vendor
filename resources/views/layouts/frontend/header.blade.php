@@ -57,7 +57,12 @@
         .toolbox{
             display: none;
         }
-        
+
+        .img_ad_banner{
+            width: 100%;
+            height: 9rem;
+        }
+
         .to-be-share-holder{
             float: right;
             background-color: yellow;
@@ -65,7 +70,7 @@
             border-radius: 30px;
             margin-top: -37px;
         }
-        
+
         .main_menu_ul{
             display:none;
         }
@@ -79,11 +84,16 @@
             .toolbox{
                 display: block;
             }
-            
+
             .main_menu_ul{
                 display:block;
             }
-           
+
+            .img_ad_banner{
+                width: 100%;
+                height: 86px;
+            }
+
             .cartaddbtn{
                 padding:5px 5px !important; font-size:0.5rem !important;
             }
@@ -115,7 +125,7 @@
 			.search_mob_wp{
 				display: block;
 			}
-			
+
 			.to-be-share-holder{
                 float: left;
                 background-color: white;
@@ -128,7 +138,7 @@
                 padding-bottom: 2px;
                 margin-left: -10px;
             }
-			
+
         }
 
 		.search_mob_wp{
@@ -177,7 +187,7 @@
 			margin-top: 11px;
 			display:none;
 		}
-		
+
     </style>
 
     @yield('css')
@@ -227,7 +237,7 @@
                                     <li>
                                         <a href="{{ route('user.profile') }}"><i style="font-size: 1.3rem;padding-right: 5px;" class="fa fa-list"></i> Order History</a>
                                     </li>
-                                
+
                                     <li>
                                         <a href="{{ route('user.logout') }}">
                                             <i style="font-size: 1.3rem;padding-right: 5px; color:red;" class="fa fa-sign-out"></i>
@@ -238,14 +248,14 @@
                                         <a href="{{ route('user.login') }}"><i style="font-size: 1.3rem;padding-right: 5px;" class="fa fa-sign-in"></i> Login</a>
                                     </li>
                                 @endauth
-                                
-                            
+
+
 							</ul>
-							
+
 						</div>
 						<!--/main-menu -->
 					</nav>
-					
+
 					<div class="col-xl-3 col-lg-2 d-lg-flex align-items-center justify-content-end text-right">
                         <a class="phone_top" href="tel://{{ optional($setting)->contact }}">
                             <i class="fa fa-phone" aria-hidden="true" style="font-size: 1.5rem; color: burlywood;"></i>
