@@ -19,16 +19,6 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
-
-    public function get_share_holder_level(){
-        return $this->belongsTo(ShareHolderLevel::class,'share_holder_level_id');
-    }
-
-    public function get_share_holders(){
-        return $this->hasMany(ShareHolder::class,'user_id');
-    }
-
-
     public function get_orders(){
         return $this->hasMany(Orders::class,'user_id');
     }

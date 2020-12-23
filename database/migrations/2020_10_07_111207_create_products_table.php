@@ -26,6 +26,7 @@ class CreateProductsTable extends Migration
             $table->decimal('e_money',15,2)->nullable();
             $table->decimal('indoor_charge',15,2)->nullable();
             $table->decimal('outdoor_charge',15,2)->nullable();
+            $table->string('position')->nullable();
             $table->text('description')->nullable();
             $table->decimal('total_price',15,2)->nullable();
             $table->string('shipp_des',150)->nullable();

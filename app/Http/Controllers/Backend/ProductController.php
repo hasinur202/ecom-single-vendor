@@ -44,11 +44,6 @@ class ProductController extends Controller
         ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
 
     public function table_search(Request $request)
     {
@@ -78,12 +73,7 @@ class ProductController extends Controller
         ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+   
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -122,12 +112,7 @@ class ProductController extends Controller
         }
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    
     public function product_status(Request $request)
     {
         $data = Product::where('id',$request->id)->first();
@@ -149,12 +134,7 @@ class ProductController extends Controller
 
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    
     public function edit($slug)
     {
         $data = auth()->user();
@@ -174,13 +154,7 @@ class ProductController extends Controller
         ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    
     public function update(Request $request, $slug)
     {
         $data = Product::where('slug',$slug)->first();
