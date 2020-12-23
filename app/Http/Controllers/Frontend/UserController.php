@@ -6,16 +6,13 @@ use Image;
 use session;
 use App\User;
 use App\Models\Cart;
-use App\Models\Nominee;
 use App\Models\Category;
 use App\Models\Settings;
 use App\Models\WishList;
-use App\Models\ShareHolder;
 use App\Models\OrderDetails;
 use App\Models\Attribute;
 use App\Models\Orders;
 use Illuminate\Http\Request;
-use App\Models\ShareHolderLevel;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -58,142 +55,6 @@ class UserController extends Controller
             'count1'=>$count1,
             'cart'=>$cart
         ]);
-    }
-
-    public function shareholderRegister(){
-        $categories = $this->queryForCat();
-        $setting = Settings::first();
-        $count = WishList::select('id')->where('user_id',Auth::user()->id ?? '')->count();
-        $count1 = Cart::select('id')->where('user_id',Auth::user()->id ?? '')->count();
-        $cart = Cart::latest()->where('user_id',auth()->user()->id ?? '')->get();
-
-        return view('layouts.frontend.user.shareholder',[
-            'categories'=>$categories,
-            'setting'=>$setting,
-            'count'=>$count,
-            'count1'=>$count1,
-            'cart'=>$cart
-        ]);
-    }
-
-
-    public function shareholderFormStore(Request $request){
-
-        $checkUser = ShareHolder::where('user_id', auth()->user()->id)->first();
-
-        if($checkUser){
-
-            return response()->json([
-                'message'=>'error'
-            ],502);
-
-        }else{
-            if($request->nom_nid != '' && $request->nid == ''){
-                $validator = Validator::make($request->all(), [
-                    'account_no' => 'required|unique:share_holders',
-                    'acc_type' =>'required',
-                    'nominee_name' =>'required',
-                    'nom_mobile' =>'required|unique:nominees',
-                    'nom_nid' =>'required|unique:nominees',
-                    'nom_image1'=>'required',
-                    'nom_image2'=>'required'
-                ]);
-                if ($validator->fails()) {
-                    return response()->json([
-                        'errors'=> $validator->messages()->all()
-                    ],404);
-                }
-                elseif($request->file('nom_image1') != null && $request->file('nom_image2') != null){
-                    $nid_front = $request->file('nom_image1');
-                    $nid_back = $request->file('nom_image2');
-
-                    $new_name1 = rand() . '.' . $nid_front->getClientOriginalExtension();
-                    $new_name2 = rand() . '.' . $nid_back->getClientOriginalExtension();
-                    $img1 = Image::make($request->file('nom_image1'))->fit(1349,375);
-                    $img2 = Image::make($request->file('nom_image2'))->fit(1349,375);
-                    $upload_path = public_path()."/images/";
-
-                    $data = ShareHolder::create([
-                        'user_id'=>auth()->user()->id,
-                        'account_no'=>$request->account_no,
-                        'acc_type'=>$request->acc_type,
-                    ]);
-
-                    $data2 = Nominee::create([
-                        'share_holder_id'=>$data->id,
-                        'nominee_name'=>$request->nominee_name,
-                        'nom_mobile'=>$request->nom_mobile,
-                        'nom_nid'=>$request->nom_nid,
-                        'nom_image1'=>$new_name1,
-                        'nom_image2'=>$new_name2,
-                    ]);
-
-                    if($data2){
-                        $img1->save($upload_path.$new_name1);
-                        $img2->save($upload_path.$new_name2);
-
-                        return response()->json([
-                            'message'=>'success'
-                        ],200);
-                    }
-                }
-                else{
-                    return response()->json([
-                        'message'=>'error'
-                    ],500);
-                }
-            }elseif($request->nid != '' && $request->nom_nid == ''){
-                $validator = Validator::make($request->all(), [
-                    'account_no' => 'required|unique:share_holders',
-                    'acc_type' =>'required',
-                    'nid' =>'required|unique:share_holders',
-                    'image_front'=>'required',
-                    'image_back'=>'required',
-                ]);
-                if ($validator->fails()) {
-
-                    return response()->json([
-                        'errors'=> $validator->messages()->all()
-                    ],404);
-                }
-                elseif($request->file('image_front') != null && $request->file('image_back') != null){
-                    $nid_front = $request->file('image_front');
-                    $nid_back = $request->file('image_back');
-
-                    $new_name1 = rand() . '.' . $nid_front->getClientOriginalExtension();
-                    $new_name2 = rand() . '.' . $nid_back->getClientOriginalExtension();
-                    $img1 = Image::make($request->file('image_front'))->fit(1349,375);
-                    $img2 = Image::make($request->file('image_back'))->fit(1349,375);
-                    $upload_path = public_path()."/images/";
-
-                    $data = ShareHolder::create([
-                        'user_id'=>auth()->user()->id,
-                        'nid'=>$request->nid,
-                        'account_no'=>$request->account_no,
-                        'acc_type'=>$request->acc_type,
-                        'image_front'=>$new_name1,
-                        'image_back'=>$new_name2,
-                    ]);
-                    if($data){
-                        $img1->save($upload_path.$new_name1);
-                        $img2->save($upload_path.$new_name2);
-
-                        return response()->json([
-                            'message'=>'success'
-                        ],200);
-                    }
-                }
-                else{
-                    return response()->json([
-                        'message'=>'error'
-                    ],500);
-                }
-            }else{
-                return response()->json([
-                    'message'=>'error'
-                ],422);
-            }
-        }
     }
 
 
