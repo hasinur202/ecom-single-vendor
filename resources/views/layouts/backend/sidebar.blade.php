@@ -53,48 +53,6 @@
 
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-share-square text-info"></i>
-              <p>
-                Manage ShareHolder
-                <i class="fas fa-angle-left right"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview" style="display: none; margin-left:20px;">
-              <li class="nav-item" style="font-size: 15px;">
-                <a href="{{route('all.shareholder')}}" class="nav-link">
-                  <i class="fa fa-check-circle nav-icon" aria-hidden="true"></i>
-                  <p>All ShareHolder</p>
-                </a>
-              </li>
-
-              <li class="nav-item" style="font-size: 15px;">
-                <a href="{{ route('new.shareholder') }}" class="nav-link">
-                  <i class="fa fa-check-circle nav-icon" aria-hidden="true"></i>
-                  <p>New Request</p>
-                </a>
-              </li>
-
-              <li class="nav-item" style="font-size: 15px;">
-                <a href="{{ route('commision.shareholder') }}" class="nav-link">
-                  <i class="fa fa-check-circle nav-icon" aria-hidden="true"></i>
-                  <p>Commision</p>
-                </a>
-              </li>
-              <li class="nav-item" style="font-size: 15px;">
-                <a href="{{ route('shareHolder.payment.list') }}" class="nav-link">
-                  <i class="fa fa-check-circle nav-icon" aria-hidden="true"></i>
-                  <p>Payment</p>
-                </a>
-              </li>
-
-
-
-            </ul>
-          </li>
-
-
-          <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
                 <i class="nav-icon fas fa-sliders-h text-blue"></i>
 
               <p>

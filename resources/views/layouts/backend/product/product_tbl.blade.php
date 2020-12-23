@@ -25,7 +25,7 @@
         @endforeach
 
         @if ($pro->id != $id)
-        <p style="cursor: pointer" onclick="addProductAvatar()"
+        <p style="cursor: pointer" onclick="addProductAvatar(`{{$pro->product_name}}`,{{ $pro->id }})"
             class="badge badge-danger">Images</p>
         @endif
         

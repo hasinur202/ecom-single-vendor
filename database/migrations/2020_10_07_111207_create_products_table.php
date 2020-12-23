@@ -23,7 +23,6 @@ class CreateProductsTable extends Migration
             $table->string('slug',150);
             $table->string('product_code',50)->nullable();
             $table->string('color',50)->nullable();
-            $table->decimal('e_money',15,2)->nullable();
             $table->decimal('indoor_charge',15,2)->nullable();
             $table->decimal('outdoor_charge',15,2)->nullable();
             $table->string('position')->nullable();

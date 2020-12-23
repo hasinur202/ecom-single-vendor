@@ -46,7 +46,6 @@ class ProductAvatarController extends Controller
     {
 
         $validator = Validator::make($request->all(), [
-            'prod_name' => 'required',
             'front' => 'required'
         ]);
 
@@ -64,7 +63,7 @@ class ProductAvatarController extends Controller
 
             if($new_name){
                 $data = ProductAvatar::create([
-                    'product_id'=>$request->prod_name,
+                    'product_id'=>$request->id,
                     'front'=>$new_name,
                     'back'=>'',
                     'left'=>'',
@@ -107,7 +106,7 @@ class ProductAvatarController extends Controller
 
             if($new_name && $new_name2 && $new_name3 && $new_name4){
                 $data = ProductAvatar::create([
-                    'product_id'=>$request->prod_name,
+                    'product_id'=>$request->id,
                     'front'=>$new_name,
                     'back'=>$new_name2,
                     'left'=>$new_name3,
@@ -145,7 +144,7 @@ class ProductAvatarController extends Controller
 
             if($new_name && $new_name2){
                 $data = ProductAvatar::create([
-                    'product_id'=>$request->prod_name,
+                    'product_id'=>$request->id,
                     'front'=>$new_name,
                     'back'=>$new_name2,
                     'left'=>$new_name3,
@@ -177,7 +176,7 @@ class ProductAvatarController extends Controller
 
             if($new_name && $new_name2){
                 $data = ProductAvatar::create([
-                    'product_id'=>$request->prod_name,
+                    'product_id'=>$request->id,
                     'front'=>$new_name,
                     'back'=>$new_name2,
                     'left'=>'',
