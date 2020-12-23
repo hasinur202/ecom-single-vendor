@@ -253,7 +253,7 @@
 	                </div>
                     <!-- /tab B -->
 
-                    <div id="pane-C" class="card tab-pane fade" role="tabpanel" aria-labelledby="tab-C">
+                    {{-- <div id="pane-C" class="card tab-pane fade" role="tabpanel" aria-labelledby="tab-C">
 	                    <div class="card-header" role="tab" id="heading-C">
 	                        <h5 class="mb-0">
 	                            <a class="collapsed" data-toggle="collapse" href="#collapse-C" aria-expanded="false" aria-controls="collapse-C">
@@ -320,7 +320,6 @@
 	                        <!-- /card-body -->
 	                    </div>
 	                </div>
-                    <!-- /tab C -->
 
                     <div id="pane-D" class="card tab-pane fade" role="tabpanel" aria-labelledby="tab-D">
 	                    <div class="card-header" role="tab" id="heading-D">
@@ -403,8 +402,7 @@
 	                        </div>
 	                        <!-- /card-body -->
 	                    </div>
-	                </div>
-                    <!-- /tab D -->
+	                </div> --}}
 	            </div>
 	            <!-- /tab-content -->
 	        </div>
@@ -415,7 +413,7 @@
 
     </main>
 
-    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    {{-- <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
           <div class="modal-content">
             <div class="modal-header">
@@ -445,7 +443,7 @@
             </div>
           </div>
         </div>
-      </div>
+    </div> --}}
 
         <div class="modal fade" id="orderByProductModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered modal-lg" role="document">

@@ -84,10 +84,10 @@
                         <h4><a href="#filter_3" data-toggle="collapse" class="closed">Color</a></h4>
                         <div class="collapse" id="filter_3">
                             <ul>
-                                @foreach ($products as $color)
+                                @foreach ($products->unique('color') as $color)
                                     <li>
                                         <label class="container_check">{{optional($color)->color}}
-                                            <input onclick="selectProperty(`{{$color->slug}}`,{{ $category ? $category->id : "null" }},{{ $sub_category ? $sub_category->id : "null" }},'slug','child_category_id','sub_child_category_id')" type="checkbox">
+                                            <input onclick="selectProperty(`{{$color->color}}`,{{ $category ? $category->id : "null" }},{{ $sub_category ? $sub_category->id : "null" }},'color','child_category_id','sub_child_category_id')" type="checkbox">
                                             <span class="checkmark"></span>
                                         </label>
                                     </li>

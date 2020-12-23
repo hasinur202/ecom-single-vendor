@@ -20,6 +20,7 @@ class CreateOrdersTable extends Migration
             $table->string('email');
             $table->string('phone');
             $table->decimal('amount');
+            $table->decimal('profit')->default(0);
             $table->string('address');
             $table->string('delivery_status')->default('pending');
             $table->string('status');

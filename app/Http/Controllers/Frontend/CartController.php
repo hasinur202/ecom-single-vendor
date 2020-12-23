@@ -100,39 +100,36 @@ class CartController extends Controller
                     'errors'=> 422
                 ],422);
             }else if(!$wish){
-               if($product){
-                    if ($attr->qty >0) {
-                        $data = Cart::create([
-                            'product_id'=> $attr->product_id,
-                            'user_id'=> auth()->user()->id,
-                            'size'=> $request->size ?? $attr->size,
-                            'total'=>$attr->sale_price*($request->qty ?? 1),
-                            'profit'=>($attr->sale_price*($request->qty ?? 1))-($attr->pur_price*($request->qty ?? 1)),
-                            'qty'=>$request->qty ?? 1
+                if ($attr->qty >0) {
+                    $data = Cart::create([
+                        'product_id'=> $attr->product_id,
+                        'user_id'=> auth()->user()->id,
+                        'size'=> $request->size ?? $attr->size,
+                        'total'=>$attr->sale_price*($request->qty ?? 1),
+                        'profit'=>($attr->sale_price*($request->qty ?? 1))-($attr->pur_price*($request->qty ?? 1)),
+                        'qty'=>$request->qty ?? 1
+                    ]);
+
+                    if ($data) {
+                        WishList::where('product_id',$request->id)->delete();
+                        $count = WishList::select('id')->where('user_id',Auth::user()->id ?? '')->count();
+                        $count1 = Cart::select('id')->where('user_id',Auth::user()->id ?? '')->count();
+                        $cart = Cart::latest()
+                        ->where('user_id',auth()->user()->id ?? '')
+                        ->with('get_product','get_product.get_product_avatars')
+                        ->get();
+
+                        return view('layouts.frontend.cart.headerCartPortion',[
+                            'cart'=>$cart,
+                            'count'=>$count,
+                            'count1'=>$count1
                         ]);
-
-                        if ($data) {
-                            WishList::where('product_id',$request->id)->delete();
-                            $count = WishList::select('id')->where('user_id',Auth::user()->id ?? '')->count();
-                            $count1 = Cart::select('id')->where('user_id',Auth::user()->id ?? '')->count();
-                            $cart = Cart::latest()
-                            ->where('user_id',auth()->user()->id ?? '')
-                            ->with('get_product','get_product.get_product_avatars')
-                            ->get();
-
-                            return view('layouts.frontend.cart.headerCartPortion',[
-                                'cart'=>$cart,
-                                'count'=>$count,
-                                'count1'=>$count1
-                            ]);
-                        }
-                    }else{
-                        return response()->json([
-                            'stockOut'=>'stock out'
-                        ],404);
                     }
-
-               }
+                }else{
+                    return response()->json([
+                        'stockOut'=>'stock out'
+                    ],404);
+                }
             }
         }else{
             return response()->json([

@@ -40,10 +40,8 @@ class SslCommerzPaymentController extends Controller
         $post_data['cus_name'] = $request->name;
         $post_data['cus_email'] = $request->email;
         $post_data['cus_add1'] = $request->address;
-        $post_data['total_emoney'] = $request->total_emoney;
         $post_data['qty'] = $request->qty;
         $post_data['delivery_status'] = 'pending';
-        $post_data['token'] = $request->token;
         $post_data['cus_add2'] = "";
         $post_data['cus_city'] = "";
         $post_data['cus_state'] = "";
@@ -74,92 +72,27 @@ class SslCommerzPaymentController extends Controller
         $post_data['value_d'] = "ref004";
 
         if($request->payment == 'cash on delivery'){
-            if($request->token != null){
-                $data = ShareHolder::where('token',$request->token)->first();
-                if($data == null){
-                    alert()->error('Invalid Token','Try to input correct token! Thank You.');
-                    return redirect()->back();
-                }else{
-                    $post_data['payment'] = $request->payment;
-                    $update_product = DB::table('orders')
-                    ->where('transaction_id', $post_data['tran_id'])
-                    ->updateOrInsert([
-                        'user_id'=>$post_data['user_id'],
-                        'name' => $post_data['cus_name'],
-                        'email' => $post_data['cus_email'],
-                        'phone' => $post_data['cus_phone'],
-                        'amount' => $post_data['total_amount'],
-                        'status' => 'Processing',
-                        'token' => $post_data['token'],
-                        'address' => $post_data['cus_add1'],
-                        'qty' => $post_data['qty'],
-                        'total_emoney' => $post_data['total_emoney'],
-                        'transaction_id' => $post_data['tran_id'],
-                        'payment' => $post_data['payment'],
-                        'currency' => $post_data['currency'],
-                        'created_at' => Carbon::now(),
-                        'updated_at' => Carbon::now()
-                    ]);
+            $post_data['payment'] = $request->payment;
+            DB::table('orders')
+            ->where('transaction_id', $post_data['tran_id'])
+            ->updateOrInsert([
+                'user_id'=>$post_data['user_id'],
+                'name' => $post_data['cus_name'],
+                'email' => $post_data['cus_email'],
+                'phone' => $post_data['cus_phone'],
+                'amount' => $post_data['total_amount'],
+                'status' => 'Processing',
+                'address' => $post_data['cus_add1'],
+                'qty' => $post_data['qty'],
+                'transaction_id' => $post_data['tran_id'],
+                'payment' => $post_data['payment'],
+                'currency' => $post_data['currency'],
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ]);
 
-                    //insert shareholder id to users table
-                    DB::table('users')
-                    ->where('id', $post_data['user_id'])
-                    ->update([
-                        'share_holder_id'=>$data->id,
-                    ]);
-
-                    //check Current Emoney in shareholder account
-                    $currentEmoney = User::where('id',$data->user_id)->first();
-                    //Count User those are under the shareholder
-                    $userCount = User::where('share_holder_id',$data->id)->count();
-                    $countUser = strval($userCount);
-
-
-                    $getShareHolderLevel = ShareHolderLevel::where('cycle_value','<=',$countUser)->orderBy('cycle_value', 'DESC')->first();
-
-                    if($getShareHolderLevel != null){
-                        $newTotalEmoney = $currentEmoney->e_money + $request->total_emoney + $getShareHolderLevel->e_money;
-                        $level_Id = $getShareHolderLevel->id;
-                        DB::table('users')->where('id', $data->user_id)->update([
-                            'e_money' =>$newTotalEmoney,
-                            'share_holder_level_id'=>$level_Id,
-                        ]);
-
-                        ShareHolder::where('id',$data->id)->update([
-                            'share_holder_level_id'=>$level_Id,
-                        ]);
-
-                    }else{
-                        $newTotalEmoney = $currentEmoney->e_money + $request->total_emoney;
-                        DB::table('users')->where('id', $data->user_id)->update([
-                            'e_money' =>$newTotalEmoney,
-                        ]);
-                    }
-
-                }
-
-            }else{
-                $post_data['payment'] = $request->payment;
-                DB::table('orders')
-                ->where('transaction_id', $post_data['tran_id'])
-                ->updateOrInsert([
-                    'user_id'=>$post_data['user_id'],
-                    'name' => $post_data['cus_name'],
-                    'email' => $post_data['cus_email'],
-                    'phone' => $post_data['cus_phone'],
-                    'amount' => $post_data['total_amount'],
-                    'status' => 'Processing',
-                    'address' => $post_data['cus_add1'],
-                    'qty' => $post_data['qty'],
-                    'transaction_id' => $post_data['tran_id'],
-                    'payment' => $post_data['payment'],
-                    'currency' => $post_data['currency'],
-                    'created_at' => Carbon::now(),
-                    'updated_at' => Carbon::now()
-                ]);
-            }
             $total = 0;
-            $order = Orders::orderBy('id', 'desc')->where('user_id',auth()->user()->id)->where('status','Processing')->first();
+            $order = Orders::latest()->where('user_id',auth()->user()->id)->where('status','Processing')->first();
             $carts = Cart::where('user_id',auth()->user()->id)->get();
                 foreach($carts as $cart){
                     OrderDetails::create([
@@ -186,88 +119,26 @@ class SslCommerzPaymentController extends Controller
             toast('Order Successful','success')->padding('10px')->width('270px')->timerProgressBar()->hideCloseButton();
             return redirect()->route('confirm.pay');
         }else{
-            if($request->token != null){
-                $data = ShareHolder::where('token',$request->token)->first();
-                if($data == null){
-                    alert()->error('Invalid Token','Try to input correct token! Thank You.');
-                    return redirect()->back();
-                }else{
-                    $post_data['payment'] = $request->payment;
-                    $update_product = DB::table('orders')
-                    ->where('transaction_id', $post_data['tran_id'])
-                    ->updateOrInsert([
-                        'user_id'=>$post_data['user_id'],
-                        'name' => $post_data['cus_name'],
-                        'email' => $post_data['cus_email'],
-                        'phone' => $post_data['cus_phone'],
-                        'amount' => $post_data['total_amount'],
-                        'status' => 'Pending',
-                        'token' => $post_data['token'],
-                        'address' => $post_data['cus_add1'],
-                        'qty' => $post_data['qty'],
-                        'total_emoney' => $post_data['total_emoney'],
-                        'transaction_id' => $post_data['tran_id'],
-                        'currency' => $post_data['currency'],
-                        'created_at' => Carbon::now(),
-                        'updated_at' => Carbon::now()
-                    ]);
-
-                    //insert shareholder id to users table
-                    DB::table('users')
-                    ->where('id', $post_data['user_id'])
-                    ->update([
-                        'share_holder_id'=>$data->id,
-                    ]);
-
-                    //check Current Emoney in shareholder account
-                    $currentEmoney = User::where('id',$data->user_id)->first();
-                    //Count User those are under the shareholder
-                    $userCount = User::where('share_holder_id',$data->id)->count();
-                    $countUser = strval($userCount);
-
-
-                    $getShareHolderLevel = ShareHolderLevel::where('cycle_value','<=',$countUser)->orderBy('cycle_value', 'DESC')->first();
-
-                    if($getShareHolderLevel != null){
-                        $newTotalEmoney = $currentEmoney->e_money + $request->total_emoney + $getShareHolderLevel->e_money;
-                        $level_Id = $getShareHolderLevel->id;
-                        DB::table('users')->where('id', $data->user_id)->update([
-                            'e_money' =>$newTotalEmoney,
-                            'share_holder_level_id'=>$level_Id,
-                        ]);
-
-                        ShareHolder::where('id',$data->id)->update([
-                            'share_holder_level_id'=>$level_Id,
-                        ]);
-
-                    }else{
-                        $newTotalEmoney = $currentEmoney->e_money + $request->total_emoney;
-                        DB::table('users')->where('id', $data->user_id)->update([
-                            'e_money' =>$newTotalEmoney,
-                        ]);
-                    }
-
-                }
-
-            }else{
-                $post_data['payment'] = $request->payment;
-                DB::table('orders')
-                ->where('transaction_id', $post_data['tran_id'])
-                ->updateOrInsert([
-                    'user_id'=>$post_data['user_id'],
-                    'name' => $post_data['cus_name'],
-                    'email' => $post_data['cus_email'],
-                    'phone' => $post_data['cus_phone'],
-                    'amount' => $post_data['total_amount'],
-                    'status' => 'Pending',
-                    'address' => $post_data['cus_add1'],
-                    'qty' => $post_data['qty'],
-                    'transaction_id' => $post_data['tran_id'],
-                    'currency' => $post_data['currency'],
-                    'created_at' => Carbon::now(),
-                    'updated_at' => Carbon::now()
-                ]);
-            }
+            
+            $post_data['payment'] = $request->payment;
+            DB::table('orders')
+            ->where('transaction_id', $post_data['tran_id'])
+            ->updateOrInsert([
+                'user_id'=>$post_data['user_id'],
+                'name' => $post_data['cus_name'],
+                'email' => $post_data['cus_email'],
+                'phone' => $post_data['cus_phone'],
+                'amount' => $post_data['total_amount'],
+                'status' => 'Pending',
+                'address' => $post_data['cus_add1'],
+                'qty' => $post_data['qty'],
+                'transaction_id' => $post_data['tran_id'],
+                'payment' => $post_data['payment'],
+                'currency' => $post_data['currency'],
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ]);
+            
         }
 
 

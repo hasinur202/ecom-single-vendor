@@ -335,6 +335,40 @@
         })
     }
 
+    function searchProduct(){
+        $.ajax({
+            url: "{{ route('search') }}",
+            method: "POST",
+            data: {
+                "_token": "{{ csrf_token() }}",
+                'name':$("#data").val()
+            },
+            dataType: 'html',
+            success: function(response) {
+                if ($("#data").val() != null) {
+                    if (window.screen.availWidth < 600) {
+                        $("#searchData1").html(response);
+                        $("#searchData1").show();
+                    }else{
+                        $("#searchData").html(response);
+                        $("#searchData").show();
+                    }
+
+                }else{
+                    $("#searchData").fadeOut();
+                    $("#searchData1").hide();
+                }
+
+            },
+        })
+        $(document).on('click', 'li', function(){
+            $("#data").val($(this).text());
+            $("#searchData").fadeOut();
+            $("#searchData1").hide();
+            window.location.href="/"+$("#data").val();
+        });
+    }
+
     function itemDelete(id){
         $.ajax({
             url: "{{ route('cart.item.delete') }}",
