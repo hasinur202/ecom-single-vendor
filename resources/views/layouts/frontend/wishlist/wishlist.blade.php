@@ -107,19 +107,17 @@
             },
             error: function(e) {
                 if (e.status == 422) {
-                    swal("Opps! Product already in cart", {
-                        icon: "error"
-                    });
-                    setTimeout(function() {
-                        swal.close();
-                    },3000);
+                    Swal.fire({
+                        icon: 'warning',
+                        title: 'Oops...',
+                        text: 'Product already in cart!'
+                    })
                 }else{
-                    swal("Opps! You are not logged In", {
-                        icon: "error"
-                    });
-                    setTimeout(function() {
-                        swal.close();
-                    },3000);
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'You are not logged in!'
+                    })
                 }
             }
         })
@@ -143,7 +141,7 @@
     }
 
     function searchProduct(){
-        
+
         $.ajax({
             url: "{{ route('search') }}",
             method: "POST",
@@ -161,7 +159,7 @@
                         $("#searchData").html(response);
                         $("#searchData").show();
                     }
-                    
+
                 }else{
                     $("#searchData").fadeOut();
                     $("#searchData1").hide();

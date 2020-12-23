@@ -4712,11 +4712,17 @@ body.modal-open .mm-slideout {
     margin-bottom: 25px;
     text-align: center;
     position: relative;
-    cursor: pointer
+    cursor: pointer;
+    border: 1px solid #ddd;
 }
 
 .grid_item:hover ul li {
     display: block
+}
+
+.grid_item:hover {
+    box-shadow: 3px 3px 11px 0px #677691;
+    transition: 0.5s;
 }
 
 .grid_item figure {

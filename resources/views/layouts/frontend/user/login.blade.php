@@ -18,7 +18,7 @@
 		    <h1>Sign In or Create an Account</h1>
 	    </div>
         <!-- /page_header -->
-		<div class="row justify-content-left">
+		<div class="row justify-content-center">
 
 			<div class="col-xl-6 col-lg-6 col-md-8">
 				<div class="box_account">
@@ -48,7 +48,7 @@
                                         </label>
                                     </div>
                                     <div class="float-right"><a id="forgot" href="javascript:void(0);">Lost Password?</a></div>
-                                </div> 
+                                </div>
                             </form>
                             <div class="row no-gutters">
                                 <div class="col-lg-6 pr-lg-1">
@@ -70,16 +70,7 @@
             </div>
 
 
-            <div class="col-xl-6 col-lg-6 col-md-8">
-				<div class="box_account" style="margin-top: 2.4rem;">
 
-					<div class="form_container">
-						 <img style="height: 16.8rem; width: 100%;" src="/images/1127001430.jpg">
-
-
-				    </div>
-	    	    </div>
-            </div>
 
 
 
@@ -125,7 +116,7 @@
     }
 
     function searchProduct(){
-        
+
         $.ajax({
             url: "{{ route('search') }}",
             method: "POST",
@@ -143,7 +134,7 @@
                         $("#searchData").html(response);
                         $("#searchData").show();
                     }
-                    
+
                 }else{
                     $("#searchData").fadeOut();
                     $("#searchData1").hide();
