@@ -19,6 +19,7 @@ class CreateCartsTable extends Migration
             $table->foreignId('user_id')->nullable()->constrained('users');
             $table->string('size')->nullable();
             $table->integer('qty')->default(0);
+            $table->decimal('profit')->default(0);
             $table->decimal('total')->default(0.00);
             $table->string('shipp_des')->nullable();
             $table->string('delivery_charge')->nullable();

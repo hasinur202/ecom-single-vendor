@@ -72,8 +72,8 @@
                     <div class="grid_item">
                         @foreach ($product->get_product_avatars as $avtr)
                         <figure>
-                            <a href="product-detail-1.html">
-                                <img style="    height: 200px !important;
+                            <a href="{{ route('quick',$product->slug) }}">
+                                <img style="height: 200px !important;
                                 width: 100% !important;" class="owl-lazy" src="{{asset('/images/'.$avtr->front)}}" data-src="{{asset('/images/'.$avtr->front)}}" alt="">
                             </a>
                         </figure>
@@ -132,7 +132,7 @@
                 <div class="grid_item">
                     @foreach ($product->get_product_avatars as $avtr)
                     <figure>
-                        <a href="product-detail-1.html">
+                        <a href="{{ route('quick',$product->slug) }}">
                             <img style="    height: 200px !important;
                             width: 100% !important;" class="img-fluid lazy" src="{{asset('/images/'.$avtr->front)}}" data-src="{{asset('/images/'.$avtr->front)}}" alt="">
                             <img style="    height: 200px !important;
@@ -176,7 +176,7 @@
                 <div class="grid_item">
                     @foreach ($product->get_product_avatars as $avtr)
                     <figure>
-                        <a href="product-detail-1.html">
+                        <a href="{{ route('quick',$product->slug) }}">
                             <img style="    height: 200px !important;
                             width: 100% !important;" class="img-fluid lazy" src="{{asset('/images/'.$avtr->front)}}" data-src="{{asset('/images/'.$avtr->front)}}" alt="">
                             <img style="    height: 200px !important;
@@ -221,7 +221,7 @@
                 <div class="grid_item">
                     @foreach ($product->get_product_avatars as $avtr)
                     <figure>
-                        <a href="product-detail-1.html">
+                        <a href="{{ route('quick',$product->slug) }}">
                             <img style="    height: 200px !important;
                             width: 100% !important;" class="img-fluid lazy" src="{{asset('/images/'.$avtr->front)}}" data-src="{{asset('/images/'.$avtr->front)}}" alt="">
                             <img style="    height: 200px !important;
@@ -266,7 +266,7 @@
                 <div class="grid_item">
                     @foreach ($product->get_product_avatars as $avtr)
                     <figure>
-                        <a href="product-detail-1.html">
+                        <a href="{{ route('quick',$product->slug) }}">
                             <img style="    height: 200px !important;
                             width: 100% !important;" class="img-fluid lazy" src="{{asset('/images/'.$avtr->front)}}" data-src="{{asset('/images/'.$avtr->front)}}" alt="">
                             <img style="    height: 200px !important;

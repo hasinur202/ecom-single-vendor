@@ -63,19 +63,6 @@ class UserController extends Controller
         $setting = Settings::first();
         $count = WishList::select('id')->where('user_id',Auth::user()->id ?? '')->count();
         $count1 = Cart::select('id')->where('user_id',Auth::user()->id ?? '')->count();
-
-        $shareholder = ShareHolder::with('get_users','get_users.get_share_holder_level')->where('token','!=',null)->where('user_id',Auth::user()->id ?? '')->first();
-        $countClient = User::where('share_holder_id',$shareholder->id ?? '')->count();
-        $holder_users = User::where('share_holder_id',$shareholder->id ?? '')->get();
-
-        //count all user product those users are under the shareholder
-        $shareHolderUser = Orders::where('token',$shareholder->token ?? '')->get();
-        $countSharedUserPro = 0;
-        foreach($shareHolderUser as $userSharedHolder){
-            $countSharedUserPro = $countSharedUserPro + OrderDetails::where('order_id',$userSharedHolder->id)->count();
-        }
-
-        $shareholderlevels = ShareHolderLevel::all();
         $userOrderDetails = OrderDetails::with('get_product');
         $orders = Orders::where('user_id',auth()->user()->id ?? '')->get();
         $cart = Cart::latest()->where('user_id',auth()->user()->id ?? '')->get();
@@ -86,11 +73,6 @@ class UserController extends Controller
             'count'=>$count,
             'count1'=>$count1,
             'cart'=>$cart,
-            'shareholder'=>$shareholder,
-            'countClient'=>$countClient,
-            'countSharedUserPro'=>$countSharedUserPro,
-            'shareholderlevels'=>$shareholderlevels,
-            'holder_users'=>$holder_users,
             'userOrderDetails'=>$userOrderDetails,
             'orders'=>$orders
         ]);
