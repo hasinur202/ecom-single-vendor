@@ -167,22 +167,19 @@ class CategoryController extends Controller
         $category = Category::find($request->id);
         $category->explor = 1;
         $category->save();
-        toast('Category Active successfully','success')
-        ->padding('10px')->width('270px')->timerProgressBar()->hideCloseButton();
         return response()->json([
             'message'=>'success'
-        ]);
+        ],200);
     }
     public function inactive(Request $request)
     {
         $category = Category::find($request->id);
         $category->explor = 0;
         $category->save();
-        toast('Category inactive successfully','success')
-        ->padding('10px')->width('270px')->timerProgressBar()->hideCloseButton();
+        
         return response()->json([
             'message'=>'success'
-        ]);
+        ],200);
     }
     public function destroy(Request $request)
     {

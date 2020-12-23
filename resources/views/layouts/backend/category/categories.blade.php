@@ -121,6 +121,9 @@
                                         Category Cover
                                     </th>
                                     <th class="sorting" style="width: 204px;">
+                                        Explor
+                                    </th>
+                                    <th class="sorting" style="width: 204px;">
                                         Status
                                     </th>
                                     <th class="sorting" style="width: 99px;">
@@ -136,6 +139,13 @@
                                             <td class="sorting_1">
                                             <img style="width: 100%;
                                             height: 39px;" src="{{ asset('/images/' . $cat->cover) }}" alt="">
+                                            </td>
+                                            <td>
+                                                @if ($cat->explor == 0)
+                                                <p style="cursor: pointer;" onclick="active({{$cat->id}})" class="badge badge-warning">Inactive</p>
+                                                @else
+                                                <p style="cursor: pointer;" onclick="inactive({{$cat->id}})" class="badge badge-info">Active</p>
+                                                @endif
                                             </td>
                                             <td>
                                                 <p class="badge badge-success">Active</p>
@@ -293,7 +303,6 @@
         function deleteCat(cat) {
             id = cat.id;
             status = cat.status;
-            console.log(id);
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -314,41 +323,37 @@
         }
 
         function active(id){
-          id = id;
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
-
             $.ajax({
                 url: "{{ route('category.active') }}",
                 type: "POST",
                 data: {
+                    "_token": "{{ csrf_token() }}",
                     id: id
                 },
                 success: function(response) {
                     window.location.reload();
+                    Toast.fire({
+                        icon:'success',
+                        title:'Category explore successfull.'
+                    });
                 }
             });
         }
 
         function inactive(id){
-          id = id;
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
-
             $.ajax({
                 url: "{{ route('category.inactive') }}",
                 type: "POST",
                 data: {
+                    "_token": "{{ csrf_token() }}",
                     id: id
                 },
                 success: function(response) {
                     window.location.reload();
+                    Toast.fire({
+                        icon:'success',
+                        title:'Category inactive successfull.'
+                    });
                 }
             });
         }
