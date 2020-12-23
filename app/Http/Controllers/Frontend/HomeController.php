@@ -30,7 +30,7 @@ class HomeController extends Controller
         $cart = Cart::latest()->where('user_id',auth()->user()->id ?? '')->get();
         $count = WishList::select('id')->where('user_id',auth()->user()->id ?? '')->count();
         $count1 = Cart::select('id')->where('user_id',auth()->user()->id ?? '')->count();
-        $products = Product::select('product_name')->get();
+        $products = Product::with('get_product_avatars','get_attribute')->get();
         
         return view('layouts.frontend.home',[
             'categories'=>$categories,
