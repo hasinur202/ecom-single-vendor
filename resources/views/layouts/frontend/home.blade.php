@@ -63,6 +63,8 @@
         <div class="main_title">
             <h2>Flash Sale</h2>
             <span>Products</span>
+            <h4 style="text-align: left; font-size:20px; position: absolute; color: darkslateblue;">End In</h4>
+            <div data-countdown="2020/12/30" class="countdown">aedfa sdf</div>
         </div>
         <div class="owl-carousel owl-theme products_carousel">
             <div class="item">
@@ -295,7 +297,7 @@
     <!-- /container -->
 
 
-    <div class="container margin_60_35">
+    <div class="container">
         <div class="row">
             <div class="col-lg-6">
                 <a href="#">
@@ -518,7 +520,7 @@
 
 
 
-    <div class="container margin_60_35">
+    <div class="container margin_60_35" style="padding-bottom:10px !important;">
         <div class="main_title">
             <h2>Just For You</h2>
             <span>Products</span>
