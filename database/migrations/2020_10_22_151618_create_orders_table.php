@@ -25,7 +25,6 @@ class CreateOrdersTable extends Migration
             $table->string('delivery_status')->default('pending');
             $table->string('status');
             $table->string('transaction_id');
-            $table->string('token')->nullable();
             $table->string('currency');
             $table->string('payment',150)->nullable();
             $table->integer('qty')->nullable();
