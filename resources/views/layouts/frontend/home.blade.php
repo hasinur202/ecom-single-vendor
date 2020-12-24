@@ -100,6 +100,45 @@
     </div>
 
 
+
+    <div >
+        <div class="container margin_30" style="margin-bottom: 1rem;">
+            <div class="main_title">
+                <h2>Shop By Brand</h2><span>Products</span>
+            </div>
+            <div id="brands" class="owl-carousel owl-theme bg_gray">
+                <div class="item">
+                    <a href="#0"><img src="assets/img/brands/placeholder_brands.png" data-src="assets/img/brands/logo_1.png" alt="" class="brnd_hght owl-lazy"></a>
+                </div>
+                <!-- /item -->
+                <div class="item">
+                    <a href="#0"><img src="assets/img/brands/placeholder_brands.png" data-src="assets/img/brands/logo_2.png" alt="" class="brnd_hght owl-lazy"></a>
+                </div>
+                <!-- /item -->
+                <div class="item">
+                    <a href="#0"><img src="assets/img/brands/placeholder_brands.png" data-src="assets/img/brands/logo_3.png" alt="" class="brnd_hght owl-lazy"></a>
+                </div>
+                <!-- /item -->
+                <div class="item">
+                    <a href="#0"><img src="assets/img/brands/placeholder_brands.png" data-src="assets/img/brands/logo_4.png" alt="" class="brnd_hght owl-lazy"></a>
+                </div>
+                <!-- /item -->
+                <div class="item">
+                    <a href="#0"><img src="assets/img/brands/placeholder_brands.png" data-src="assets/img/brands/logo_5.png" alt="" class="brnd_hght owl-lazy"></a>
+                </div>
+                <!-- /item -->
+                <div class="item">
+                    <a href="#0"><img src="assets/img/brands/placeholder_brands.png" data-src="assets/img/brands/logo_6.png" alt="" class="brnd_hght owl-lazy"></a>
+                </div>
+                <!-- /item -->
+            </div>
+            <!-- /carousel -->
+        </div>
+        <!-- /container -->
+    </div>
+    <!-- /bg_gray -->
+
+
     <div class="container">
         <div class="row">
             <div class="col-lg-6">
@@ -121,14 +160,17 @@
         </div>
     </div>
 
-    <div class="container" style="margin-bottom: 0rem">
+
+
+    {{-- <div class="container" style="margin-bottom: 0rem">
         <div class="main_title">
             <h2>Explore Popular Categories</h2>
         </div>
+
         <div class="row">
             <div class="col-6 col-sm-8 col-lg-3" style="margin-bottom: 5px;">
                 <a target="_blank" href="#" class="icon-box icon-box-side">
-                <div style="border: 1px solid #ddd; width:105%; padding-top:.3rem !important; padding-bottom: .3rem !important;">
+                <div style="border: 1px solid #ddd; width:100%; padding-top:.3rem !important; padding-bottom: .3rem !important;">
                     <img style="width: 35px !important; margin-right:10px;margin-left:20px;
                     height: 30px !important;" src="https://jinershop.com/images/598180269.png" alt="">
                     <span>Sports &amp; Outdoor</span>
@@ -138,7 +180,7 @@
             </div>
             <div class="col-6 col-sm-8 col-lg-3" style="margin-bottom: 5px;">
                 <a target="_blank" href="#" class="icon-box icon-box-side">
-                <div style="border: 1px solid #ddd; width:105%; padding-top:.3rem !important; padding-bottom: .3rem !important;">
+                <div style="border: 1px solid #ddd; width:100%; padding-top:.3rem !important; padding-bottom: .3rem !important;">
                     <img style="width: 35px !important; margin-right:10px;margin-left:20px;
                     height: 30px !important;" src="https://jinershop.com/images/598180269.png" alt="">
                     <span>Sports &amp; Outdoor</span>
@@ -148,7 +190,7 @@
             </div>
             <div class="col-6 col-sm-8 col-lg-3" style="margin-bottom: 5px;">
                 <a target="_blank" href="#" class="icon-box icon-box-side">
-                <div style="border: 1px solid #ddd; width:105%; padding-top:.3rem !important; padding-bottom: .3rem !important;">
+                <div style="border: 1px solid #ddd; width:100%; padding-top:.3rem !important; padding-bottom: .3rem !important;">
                     <img style="width: 35px !important; margin-right:10px;margin-left:20px;
                     height: 30px !important;" src="https://jinershop.com/images/598180269.png" alt="">
                     <span>Sports &amp; Outdoor</span>
@@ -158,7 +200,7 @@
             </div>
             <div class="col-6 col-sm-8 col-lg-3" style="margin-bottom: 5px;">
                 <a target="_blank" href="#" class="icon-box icon-box-side">
-                <div style="border: 1px solid #ddd; width:105%; padding-top:.3rem !important; padding-bottom: .3rem !important;">
+                <div style="border: 1px solid #ddd; width:100%; padding-top:.3rem !important; padding-bottom: .3rem !important;">
                     <img style="width: 35px !important; margin-right:10px;margin-left:20px;
                     height: 30px !important;" src="https://jinershop.com/images/598180269.png" alt="">
                     <span>Sports &amp; Outdoor</span>
@@ -168,7 +210,7 @@
             </div>
             <div class="col-6 col-sm-8 col-lg-3" style="margin-bottom: 5px;">
                 <a target="_blank" href="#" class="icon-box icon-box-side">
-                <div style="border: 1px solid #ddd; width:105%; padding-top:.3rem !important; padding-bottom: .3rem !important;">
+                <div style="border: 1px solid #ddd; width:100%; padding-top:.3rem !important; padding-bottom: .3rem !important;">
                     <img style="width: 35px !important; margin-right:10px;margin-left:20px;
                     height: 30px !important;" src="https://jinershop.com/images/598180269.png" alt="">
                     <span>Sports &amp; Outdoor</span>
@@ -178,7 +220,7 @@
             </div>
             <div class="col-6 col-sm-8 col-lg-3" style="margin-bottom: 5px;">
                 <a target="_blank" href="#" class="icon-box icon-box-side">
-                <div style="border: 1px solid #ddd; width:105%; padding-top:.3rem !important; padding-bottom: .3rem !important;">
+                <div style="border: 1px solid #ddd; width:100%; padding-top:.3rem !important; padding-bottom: .3rem !important;">
                     <img style="width: 35px !important; margin-right:10px;margin-left:20px;
                     height: 30px !important;" src="https://jinershop.com/images/598180269.png" alt="">
                     <span>Sports &amp; Outdoor</span>
@@ -189,7 +231,8 @@
 
 
         </div>
-    </div>
+
+    </div> --}}
 
 
     <div class="container margin_60_35">

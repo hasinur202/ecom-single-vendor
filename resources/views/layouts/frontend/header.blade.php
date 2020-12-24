@@ -74,12 +74,19 @@
         .main_menu_ul{
             display:none;
         }
+        .brnd_hght{
+            height: 90px;
+        }
 
         @media (max-width: 600px){
             header .main_header #logo a img {
                 height: 30px;
                 width: auto;
                 padding:0px;
+            }
+
+            .brnd_hght{
+                height: auto;
             }
             .toolbox{
                 display: block;

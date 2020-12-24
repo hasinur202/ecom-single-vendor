@@ -4975,7 +4975,8 @@ body.modal-open .mm-slideout {
 @media (max-width: 575px) {
     .countdown {
         margin-left: -45px;
-        width: 90px
+        width: 105px;
+        left: 20%;
     }
 }
 
