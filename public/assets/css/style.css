@@ -4786,7 +4786,7 @@ body.modal-open .mm-slideout {
         position: relative;
         left: 0px;
         right: inherit;
-        margin-bottom: 10px;
+        margin-bottom: 0px;
         top: 0
     }
 }
@@ -4975,7 +4975,8 @@ body.modal-open .mm-slideout {
 @media (max-width: 575px) {
     .countdown {
         margin-left: -45px;
-        width: 90px
+        width: 105px;
+        left: 26%;
     }
 }
 
@@ -7589,8 +7590,8 @@ screen and (max-height: 300px) {
 
 .btn_outline {
     padding: 7px 15px;
-    background: #fff;
-    color: #333;
+    background: #e4e3ec;
+    color: slategrey;
     border: 1px solid #ddd;
 }
 

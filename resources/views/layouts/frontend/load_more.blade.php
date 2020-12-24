@@ -11,10 +11,8 @@
             @foreach ($product->get_product_avatars as $avtr)
             <figure>
                 <a href="{{ route('quick',$product->slug) }}">
-                    <img style="    height: 200px !important;
-                    width: 100% !important;" class="img-fluid lazy" src="{{asset('/images/'.$avtr->front)}}" data-src="{{asset('/images/'.$avtr->front)}}" alt="">
-                    <img style="    height: 200px !important;
-                    width: 100% !important;" class="img-fluid lazy" src="{{asset('/images/'.$avtr->front)}}" data-src="{{asset('/images/'.$avtr->front)}}" alt="">
+                    <img class="img-fluid lazy resp_img_pro" src="{{asset('/images/'.$avtr->front)}}" data-src="{{asset('/images/'.$avtr->front)}}" alt="">
+                    <img class="img-fluid lazy resp_img_pro" src="{{asset('/images/'.$avtr->front)}}" data-src="{{asset('/images/'.$avtr->front)}}" alt="">
                 </a>
             </figure>
             @endforeach

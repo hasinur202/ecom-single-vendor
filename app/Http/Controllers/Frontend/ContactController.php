@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers\Frontend;
 
 use App\Models\Cart;
@@ -8,6 +7,7 @@ use App\Models\Product;
 use App\Models\Category;
 use App\Models\Settings;
 use App\Models\WishList;
+use App\Models\AdManager;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -24,7 +24,7 @@ class ContactController extends Controller
         return Category::where('status',1)->with('get_child_category','get_child_category.get_sub_child_category')->get();
     }
 
-     public function index()
+    public function index()
     {
         $categories = $this->queryForCat();
         $setting = Settings::first();
@@ -32,6 +32,7 @@ class ContactController extends Controller
         $count = WishList::select('id')->where('user_id',auth()->user()->id ?? '')->count();
         $count1 = Cart::select('id')->where('user_id',auth()->user()->id ?? '')->count();
         $products = Product::select('product_name')->get();
+        $ads = AdManager::all();
 
         return view('layouts.frontend.settings.contact_us',[
             'categories'=>$categories,
@@ -39,13 +40,13 @@ class ContactController extends Controller
             'cart'=>$cart,
             'count'=>$count,
             'count1'=>$count1,
-            'products'=>$products
+            'products'=>$products,
+            'ads'=>$ads
         ]);
     }
 
 
     public function storeContact(Request $request){
-
         $data = Contact::create([
             'name'=>$request->name,
             'email'=>$request->email,

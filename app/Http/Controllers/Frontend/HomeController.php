@@ -57,6 +57,7 @@ class HomeController extends Controller
         }else{
 
             $categories = $this->queryForCat();
+            $ads = AdManager::all();
             $category = ChildCategory::where('slug',$slug)->with('get_category:id,cover')->first();
             $sub_category = SubChildCategory::where('slug',$slug)->with('get_category:id,cover')->first();
             $count = WishList::select('id')->where('user_id',auth()->user()->id ?? '')->count();
@@ -64,7 +65,7 @@ class HomeController extends Controller
 
             if ($category != null) {
                 $products = Product::where('child_category_id',$category->id)->with(['get_product_avatars','get_attribute' => function ($query) {
-                    $query->whereNotNull('product_id')->get();     
+                    $query->whereNotNull('product_id')->get();
                 }])->get();
                 $product = $category->get_product()->with('get_brand')->selectRaw('distinct(brand_id)')->get();
                 $productSize = Product::where('child_category_id',$category->id)->with(['get_product_avatars','get_attribute' => function ($query) {
@@ -72,14 +73,14 @@ class HomeController extends Controller
                 }])->get();
             }elseif($sub_category !=null){
                 $products = Product::where('sub_child_category_id',$sub_category->id)->with(['get_product_avatars','get_attribute' => function ($query) {
-                    $query->whereNotNull('product_id')->get();     
+                    $query->whereNotNull('product_id')->get();
                 }])->get();
                 $product = $sub_category->get_product()->with('get_brand')->selectRaw('distinct(brand_id)')->get();
                 $productSize = Product::where('sub_child_category_id',$sub_category->id)->with(['get_product_avatars','get_attribute' => function ($query) {
                     $query->whereNotNull('size')->get();
                 }])->get();
             }
-        
+
 
             $setting = Settings::first();
             $cart = Cart::latest()->where('user_id',auth()->user()->id ?? '')->get();
@@ -94,6 +95,7 @@ class HomeController extends Controller
                 'products'=>$products,
                 'product'=>$product,
                 'productSize'=>$productSize,
+                'ads'=>$ads
             ]);
         }
     }
@@ -106,10 +108,11 @@ class HomeController extends Controller
         $sub_category = SubChildCategory::where('id',$pro_name->sub_child_category_id)->with('get_category:id,cover')->first();
         $count = WishList::select('id')->where('user_id',auth()->user()->id ?? '')->count();
         $count1 = Cart::select('id')->where('user_id',auth()->user()->id ?? '')->count();
+        $ads = AdManager::all();
 
         if ($category != null) {
             $products = Product::where('child_category_id',$category->id)->with(['get_product_avatars','get_attribute' => function ($query) {
-                $query->whereNotNull('product_id')->get();     
+                $query->whereNotNull('product_id')->get();
             }])->get();
             $product = $category->get_product()->with('get_brand')->selectRaw('distinct(brand_id)')->get();
             $productSize = Product::where('child_category_id',$category->id)->with(['get_product_avatars','get_attribute' => function ($query) {
@@ -117,7 +120,7 @@ class HomeController extends Controller
             }])->get();
         }elseif($sub_category !=null){
             $products = Product::where('sub_child_category_id',$sub_category->id)->with(['get_product_avatars','get_attribute' => function ($query) {
-                $query->whereNotNull('product_id')->get();     
+                $query->whereNotNull('product_id')->get();
             }])->get();
             $product = $sub_category->get_product()->with('get_brand')->selectRaw('distinct(brand_id)')->get();
             $productSize = Product::where('sub_child_category_id',$sub_category->id)->with(['get_product_avatars','get_attribute' => function ($query) {
@@ -138,6 +141,7 @@ class HomeController extends Controller
             'products'=>$products,
             'product'=>$product,
             'productSize'=>$productSize,
+            'ads'=>$ads
         ]);
     }
 
@@ -173,7 +177,7 @@ class HomeController extends Controller
                     ->whereHas('get_attribute', function($q) use($request){
                         $q->where($request->col_name,$request->data);
                     })->with('get_product_avatars')->get();
-                    
+
                 }else{
                     $products = Product::where($request->col_name,$request->data)
                     ->where($request->col_name2,$request->data2)
@@ -203,7 +207,7 @@ class HomeController extends Controller
         ]);
     }
 
-    
+
 
     public function search(Request $request)
     {
@@ -226,6 +230,7 @@ class HomeController extends Controller
         $product = Product::where('slug',$slug)->with('get_product_avatars','get_brand','get_attribute')->first();
         $cart = Cart::where('user_id',auth()->user()->id ?? '')->get();
         $products = Product::with('get_brand','get_product_avatars')->get();
+        $ads = AdManager::all();
 
         $setting = Settings::first();
         return view('layouts.frontend.product.product_details',[
@@ -235,7 +240,8 @@ class HomeController extends Controller
             'cart'=>$cart,
             'product'=>$product,
             'products'=>$products,
-            'setting'=>$setting
+            'setting'=>$setting,
+            'ads'=>$ads
         ]);
 
     }
@@ -247,6 +253,7 @@ class HomeController extends Controller
         $count1 = Cart::select('id')->where('user_id',auth()->user()->id ?? '')->count();
         $setting = Settings::first();
         $cart = Cart::latest()->where('user_id',auth()->user()->id ?? '')->get();
+        $ads = AdManager::all();
 
         return view('layouts.frontend.cart.confirm',[
             'categories'=>$categories,
@@ -254,6 +261,7 @@ class HomeController extends Controller
             'cart'=>$cart,
             'count'=>$count,
             'count1'=>$count1,
+            'ads'=>$ads
         ]);
     }
 
@@ -263,6 +271,7 @@ class HomeController extends Controller
         $count1 = Cart::select('id')->where('user_id',auth()->user()->id ?? '')->count();
         $setting = Settings::first();
         $cart = Cart::where('user_id',auth()->user()->id ?? '')->with('get_product')->get();
+        $ads = AdManager::all();
 
         return view('layouts.frontend.cart.billing_address',[
             'categories'=>$categories,
@@ -270,6 +279,7 @@ class HomeController extends Controller
             'cart'=>$cart,
             'count'=>$count,
             'count1'=>$count1,
+            'ads'=>$ads
         ]);
     }
 

@@ -63,7 +63,7 @@
         <div class="main_title">
             <h2>Flash Sale</h2>
             <span>Products</span>
-            <h4 style="text-align: left; font-size:20px; position: absolute; color: darkslateblue;">End In</h4>
+            <h4 style="text-align: left; font-size:16px; position: absolute; color: darkslateblue;">Ending In</h4>
             <div data-countdown="2020/12/30" class="countdown">aedfa sdf</div>
         </div>
         <div class="owl-carousel owl-theme products_carousel">
@@ -75,13 +75,12 @@
                         @foreach ($product->get_product_avatars as $avtr)
                         <figure>
                             <a href="{{ route('quick',$product->slug) }}">
-                                <img style="height: 200px !important;
-                                width: 100% !important;" class="owl-lazy" src="{{asset('/images/'.$avtr->front)}}" data-src="{{asset('/images/'.$avtr->front)}}" alt="">
+                                <img class="owl-lazy resp_img_pro" src="{{asset('/images/'.$avtr->front)}}" data-src="{{asset('/images/'.$avtr->front)}}" alt="">
                             </a>
                         </figure>
                         @endforeach
                         <div class="rating"><i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star"></i></div>
-                        <a href="product-detail-1.html">
+                        <a href="{{ route('quick',$product->slug) }}">
                             <h3>Air Wildwood ACG</h3>
                         </a>
                         <div class="price_box">
@@ -100,35 +99,84 @@
     </div>
 
 
+
+    <div >
+        <div class="container margin_30" style="margin-bottom: 1rem;">
+            <div class="main_title">
+                <h2>Shop By Brand</h2><span>Products</span>
+            </div>
+            <div id="brands" class="owl-carousel owl-theme bg_gray">
+                <div class="item">
+                    <a href="#0"><img src="assets/img/brands/placeholder_brands.png" data-src="assets/img/brands/logo_1.png" alt="" class="brnd_hght owl-lazy"></a>
+                </div>
+                <!-- /item -->
+                <div class="item">
+                    <a href="#0"><img src="assets/img/brands/placeholder_brands.png" data-src="assets/img/brands/logo_2.png" alt="" class="brnd_hght owl-lazy"></a>
+                </div>
+                <!-- /item -->
+                <div class="item">
+                    <a href="#0"><img src="assets/img/brands/placeholder_brands.png" data-src="assets/img/brands/logo_3.png" alt="" class="brnd_hght owl-lazy"></a>
+                </div>
+                <!-- /item -->
+                <div class="item">
+                    <a href="#0"><img src="assets/img/brands/placeholder_brands.png" data-src="assets/img/brands/logo_4.png" alt="" class="brnd_hght owl-lazy"></a>
+                </div>
+                <!-- /item -->
+                <div class="item">
+                    <a href="#0"><img src="assets/img/brands/placeholder_brands.png" data-src="assets/img/brands/logo_5.png" alt="" class="brnd_hght owl-lazy"></a>
+                </div>
+                <!-- /item -->
+                <div class="item">
+                    <a href="#0"><img src="assets/img/brands/placeholder_brands.png" data-src="assets/img/brands/logo_6.png" alt="" class="brnd_hght owl-lazy"></a>
+                </div>
+                <!-- /item -->
+            </div>
+            <!-- /carousel -->
+        </div>
+        <!-- /container -->
+    </div>
+    <!-- /bg_gray -->
+
+
     <div class="container">
         <div class="row">
             <div class="col-lg-6">
-                <a href="#">
+                @foreach ($ads as $ad)
+                @if($ad->position == "body-top left")
+                <a href="{{ $ad->link }}">
                     <figure>
-                        <img class="lazy img_ad_banner" src="/assets/img/blog-thumb-placeholder.jpg" data-src="images/612670428.jpg" alt="">
+                        <img class="lazy img_ad_banner" src="{{ asset('/images/' . $ad->avatar) }}" data-src="{{ asset('/images/' . $ad->avatar) }}" alt="ads">
                     </figure>
                 </a>
+                @endif
+                @endforeach
             </div>
             <!-- /box_news -->
             <div class="col-lg-6">
-                <a href="#">
+                @foreach ($ads as $ad)
+                @if($ad->position == "body-top right")
+                <a href="{{ $ad->link }}">
                     <figure>
-                        <img class="lazy img_ad_banner" src="/assets/img/blog-thumb-placeholder.jpg" data-src="images/2130407414.jpg" alt="">
-
+                        <img class="lazy img_ad_banner" src="{{ asset('/images/' . $ad->avatar) }}" data-src="{{ asset('/images/' . $ad->avatar) }}" alt="ads">
                     </figure>
                 </a>
+                @endif
+                @endforeach
             </div>
         </div>
     </div>
 
-    <div class="container" style="margin-bottom: 0rem">
+
+
+    {{-- <div class="container" style="margin-bottom: 0rem">
         <div class="main_title">
             <h2>Explore Popular Categories</h2>
         </div>
+
         <div class="row">
             <div class="col-6 col-sm-8 col-lg-3" style="margin-bottom: 5px;">
                 <a target="_blank" href="#" class="icon-box icon-box-side">
-                <div style="border: 1px solid #ddd; width:105%; padding-top:.3rem !important; padding-bottom: .3rem !important;">
+                <div style="border: 1px solid #ddd; width:100%; padding-top:.3rem !important; padding-bottom: .3rem !important;">
                     <img style="width: 35px !important; margin-right:10px;margin-left:20px;
                     height: 30px !important;" src="https://jinershop.com/images/598180269.png" alt="">
                     <span>Sports &amp; Outdoor</span>
@@ -138,7 +186,7 @@
             </div>
             <div class="col-6 col-sm-8 col-lg-3" style="margin-bottom: 5px;">
                 <a target="_blank" href="#" class="icon-box icon-box-side">
-                <div style="border: 1px solid #ddd; width:105%; padding-top:.3rem !important; padding-bottom: .3rem !important;">
+                <div style="border: 1px solid #ddd; width:100%; padding-top:.3rem !important; padding-bottom: .3rem !important;">
                     <img style="width: 35px !important; margin-right:10px;margin-left:20px;
                     height: 30px !important;" src="https://jinershop.com/images/598180269.png" alt="">
                     <span>Sports &amp; Outdoor</span>
@@ -148,7 +196,7 @@
             </div>
             <div class="col-6 col-sm-8 col-lg-3" style="margin-bottom: 5px;">
                 <a target="_blank" href="#" class="icon-box icon-box-side">
-                <div style="border: 1px solid #ddd; width:105%; padding-top:.3rem !important; padding-bottom: .3rem !important;">
+                <div style="border: 1px solid #ddd; width:100%; padding-top:.3rem !important; padding-bottom: .3rem !important;">
                     <img style="width: 35px !important; margin-right:10px;margin-left:20px;
                     height: 30px !important;" src="https://jinershop.com/images/598180269.png" alt="">
                     <span>Sports &amp; Outdoor</span>
@@ -158,7 +206,7 @@
             </div>
             <div class="col-6 col-sm-8 col-lg-3" style="margin-bottom: 5px;">
                 <a target="_blank" href="#" class="icon-box icon-box-side">
-                <div style="border: 1px solid #ddd; width:105%; padding-top:.3rem !important; padding-bottom: .3rem !important;">
+                <div style="border: 1px solid #ddd; width:100%; padding-top:.3rem !important; padding-bottom: .3rem !important;">
                     <img style="width: 35px !important; margin-right:10px;margin-left:20px;
                     height: 30px !important;" src="https://jinershop.com/images/598180269.png" alt="">
                     <span>Sports &amp; Outdoor</span>
@@ -168,7 +216,7 @@
             </div>
             <div class="col-6 col-sm-8 col-lg-3" style="margin-bottom: 5px;">
                 <a target="_blank" href="#" class="icon-box icon-box-side">
-                <div style="border: 1px solid #ddd; width:105%; padding-top:.3rem !important; padding-bottom: .3rem !important;">
+                <div style="border: 1px solid #ddd; width:100%; padding-top:.3rem !important; padding-bottom: .3rem !important;">
                     <img style="width: 35px !important; margin-right:10px;margin-left:20px;
                     height: 30px !important;" src="https://jinershop.com/images/598180269.png" alt="">
                     <span>Sports &amp; Outdoor</span>
@@ -178,7 +226,7 @@
             </div>
             <div class="col-6 col-sm-8 col-lg-3" style="margin-bottom: 5px;">
                 <a target="_blank" href="#" class="icon-box icon-box-side">
-                <div style="border: 1px solid #ddd; width:105%; padding-top:.3rem !important; padding-bottom: .3rem !important;">
+                <div style="border: 1px solid #ddd; width:100%; padding-top:.3rem !important; padding-bottom: .3rem !important;">
                     <img style="width: 35px !important; margin-right:10px;margin-left:20px;
                     height: 30px !important;" src="https://jinershop.com/images/598180269.png" alt="">
                     <span>Sports &amp; Outdoor</span>
@@ -189,34 +237,33 @@
 
 
         </div>
-    </div>
+
+    </div> --}}
 
 
     <div class="container margin_60_35">
         <div class="main_title">
             <h2>Idea Tech Mall</h2>
             <span>Products</span>
-            <div style="text-align: right;">
+            <div class="shop_more">
                 <a href="{{url('shop-more/own mall')}}" class="btn_outline">Shop More</a>
             </div>
         </div>
         <div class="row small-gutters">
             @foreach ($products as $product)
             @if ($product->position == "own mall")
-            <div class="col-6 col-md-4 col-xl-2">
+            <div class="col-4 col-md-2 col-xl-2">
                 <div class="grid_item">
                     @foreach ($product->get_product_avatars as $avtr)
                     <figure>
                         <a href="{{ route('quick',$product->slug) }}">
-                            <img style="    height: 200px !important;
-                            width: 100% !important;" class="img-fluid lazy" src="{{asset('/images/'.$avtr->front)}}" data-src="{{asset('/images/'.$avtr->front)}}" alt="">
-                            <img style="    height: 200px !important;
-                            width: 100% !important;" class="img-fluid lazy" src="{{asset('/images/'.$avtr->front)}}" data-src="{{asset('/images/'.$avtr->front)}}" alt="">
+                            <img class="img-fluid lazy resp_img_pro" src="{{asset('/images/'.$avtr->front)}}" data-src="{{asset('/images/'.$avtr->front)}}" alt="">
+                            <img class="img-fluid lazy resp_img_pro" src="{{asset('/images/'.$avtr->front)}}" data-src="{{asset('/images/'.$avtr->front)}}" alt="">
                         </a>
                     </figure>
                     @endforeach
                     <div class="rating"><i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star"></i></div>
-                    <a href="product-detail-1.html">
+                    <a href="{{ route('quick',$product->slug) }}">
                         <h3>{{$product->product_name}}</h3>
                     </a>
                     <div class="price_box">
@@ -241,27 +288,26 @@
         <div class="main_title">
             <h2>Upcoming</h2>
             <span>Products</span>
-            <div style="text-align: right;">
+            <div class="shop_more">
                 <a href="{{url('shop-more/upcoming product')}}" class="btn_outline">Shop More</a>
             </div>
         </div>
         <div class="row small-gutters">
             @foreach ($products as $product)
             @if ($product->position == "upcoming product")
-            <div class="col-6 col-md-4 col-xl-2">
+            <div class="col-4 col-md-2 col-xl-2">
                 <div class="grid_item">
                     @foreach ($product->get_product_avatars as $avtr)
                     <figure>
                         <a href="{{ route('quick',$product->slug) }}">
-                            <img style="    height: 200px !important;
-                            width: 100% !important;" class="img-fluid lazy" src="{{asset('/images/'.$avtr->front)}}" data-src="{{asset('/images/'.$avtr->front)}}" alt="">
-                            <img style="    height: 200px !important;
-                            width: 100% !important;" class="img-fluid lazy" src="{{asset('/images/'.$avtr->front)}}" data-src="{{asset('/images/'.$avtr->front)}}" alt="">
+                            <img class="img-fluid lazy resp_img_pro" src="{{asset('/images/'.$avtr->front)}}" data-src="{{asset('/images/'.$avtr->front)}}" alt="">
+
+                            <img class="img-fluid lazy resp_img_pro" src="{{asset('/images/'.$avtr->back)}}" data-src="{{asset('/images/'.$avtr->front)}}" alt="">
                         </a>
                     </figure>
                     @endforeach
                     <div class="rating"><i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star"></i></div>
-                    <a href="product-detail-1.html">
+                    <a href="{{ route('quick',$product->slug) }}">
                         <h3>{{$product->product_name}}</h3>
                     </a>
                     <div class="price_box">
@@ -284,20 +330,27 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-6">
-                <a href="#">
+                @foreach($ads as $ad)
+                @if($ad->position == "body-bottom left")
+                <a href="{{ $ad->link }}">
                     <figure>
-                        <img src="/assets/img/blog-thumb-placeholder.jpg" data-src="images/649374269.jpg" alt="" width="600" height="160" class="lazy img_ad_banner">
+                        <img class="lazy img_ad_banner" src="{{ asset('/images/' . $ad->avatar) }}" data-src="{{ asset('/images/' . $ad->avatar) }}" alt="ads">
                     </figure>
                 </a>
+                @endif
+                @endforeach
             </div>
             <!-- /box_news -->
             <div class="col-lg-6">
-                <a href="#">
+                @foreach($ads as $ad)
+                @if($ad->position == "body-bottom right")
+                <a href="{{ $ad->link }}">
                     <figure>
-                        <img src="/assets/img/blog-thumb-placeholder.jpg" data-src="images/2130407414.jpg" alt="" width="600" height="160" class="lazy img_ad_banner">
-
+                        <img class="lazy img_ad_banner" src="{{ asset('/images/' . $ad->avatar) }}" data-src="{{ asset('/images/' . $ad->avatar) }}" alt="ads">
                     </figure>
                 </a>
+                @endif
+                @endforeach
             </div>
         </div>
     </div>
@@ -306,27 +359,25 @@
         <div class="main_title">
             <h2>Global</h2>
             <span>Products</span>
-            <div style="text-align: right;">
+            <div class="shop_more">
                 <a href="{{url('shop-more/global product')}}" class="btn_outline">Shop More</a>
             </div>
         </div>
         <div class="row small-gutters">
             @foreach ($products as $product)
             @if ($product->position == "global product")
-            <div class="col-6 col-md-4 col-xl-2">
+            <div class="col-4 col-md-2 col-xl-2">
                 <div class="grid_item">
                     @foreach ($product->get_product_avatars as $avtr)
                     <figure>
                         <a href="{{ route('quick',$product->slug) }}">
-                            <img style="    height: 200px !important;
-                            width: 100% !important;" class="img-fluid lazy" src="{{asset('/images/'.$avtr->front)}}" data-src="{{asset('/images/'.$avtr->front)}}" alt="">
-                            <img style="    height: 200px !important;
-                            width: 100% !important;" class="img-fluid lazy" src="{{asset('/images/'.$avtr->front)}}" data-src="{{asset('/images/'.$avtr->front)}}" alt="">
+                            <img class="img-fluid lazy resp_img_pro" src="{{asset('/images/'.$avtr->front)}}" data-src="{{asset('/images/'.$avtr->front)}}" alt="">
+                            <img class="img-fluid lazy resp_img_pro" src="{{asset('/images/'.$avtr->front)}}" data-src="{{asset('/images/'.$avtr->front)}}" alt="">
                         </a>
                     </figure>
                     @endforeach
                     <div class="rating"><i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star"></i></div>
-                    <a href="product-detail-1.html">
+                    <a href="{{ route('quick',$product->slug) }}">
                         <h3>{{$product->product_name}}</h3>
                     </a>
                     <div class="price_box">
@@ -356,7 +407,9 @@
             @include('layouts.frontend.load_more')
         </div>
         <div style="text-align: center;">
-            <button onclick="loadMore()" class="btn_1">Load More</button>
+            <button onclick="loadMore()" class="btn_1" style="border: 1px solid #ddd;
+            color: #fff;
+            padding: 6px 13px;">Load More</button>
 
         </div>
     </div>
@@ -364,9 +417,32 @@
 
 
 
+    <div class="featured lazy" data-bg="url(assets/img/featured_home.jpg)" style="height: 200px !important">
+        <div class="opacity-mask d-flex align-items-center" data-opacity-mask="rgba(0, 0, 0, 0.5)">
+            <div class="container margin_60">
+                <div class="row justify-content-center justify-content-md-start">
+                    <div class="col-lg-6 wow" data-wow-offset="150">
+                        <h3>Get the Latest Deals</h3>
+                        <p>Subscribe Now</p>
+                        <form action="javascript:void(0)" type="post">
+                           {{-- {{ csrf_field() }} --}}
+                        <div id="newsletter">
+                            <div class="form-group">
+                                <input onfocus="enableSubscriber()" onfocusout="checkSubscriber()" type="email" name="subscriber_email" id="subscriber_email" style="background:#fff"
+                                class="form-control" placeholder="Your email" required>
+                                <button onclick="addSubscriber();" type="submit" id="btnSubmit"><i class="ti-angle-double-right"></i></button>
+                            </div>
+                        </div>
+                        <span id="statusSubscribe" style="display: none;"></span>
+                        </form>
 
+                    </div>
+                </div>
 
-
+            </div>
+        </div>
+    </div>
+    <!-- /featured -->
 </main>
 
 
@@ -381,7 +457,6 @@
                 </div>
             @endif
         @endforeach
-
         <div class="col-md-7">
             <div class="content">
                 <div class="wrapper">
@@ -394,8 +469,6 @@
                 @else
                     <a href="{{ url('login') }}" class="btn_1 mt-2 mb-4">Apply Now</a>
                 @endauth
-
-
                     <div class="form-group">
                         <label class="container_check d-inline">Dont show this PopUp again
                             <input type="checkbox">
@@ -437,6 +510,61 @@
             }
         })
     }
+        function addSubscriber(){
+            var subscriber_email = $("#subscriber_email").val();
+            $.ajax({
+                type:'post',
+                url:'/add-subscriber',
+                data:{
+                    "_token":"{{ csrf_token() }}",
+                    subscriber_email:subscriber_email
+                },
+                success:function(resp){
+                    if(resp == "exists"){
+                        $("#statusSubscribe").show();
+                        $("#btnSubmit").hide();
+                        $("#statusSubscribe").html("Error: Subscriber Email Already Exists.");
+                        $("#statusSubscribe").css({ 'background':'red', 'color':'#fff', 'border-radius':'12px', 'padding':'5px' });
+                    }else if(resp == "saved"){
+                        $("#statusSubscribe").show();
+                        $("#statusSubscribe").html("Success: Thanks for Subscribing!");
+                        $("#statusSubscribe").css({ 'background':'green', 'color':'#fff', 'border-radius':'12px', 'padding':'5px' });
+                    }
+                },
+                error:function(){
+                    alert("Error");
+                }
+            });
+        }
+
+        function checkSubscriber(){
+            var subscriber_email = $("#subscriber_email").val();
+            $.ajax({
+                type:'post',
+                url:'/check-subscriber-email',
+                data:{
+                    "_token":"{{ csrf_token() }}",
+                    subscriber_email:subscriber_email
+                },
+                success:function(resp){
+                    if(resp == "exists"){
+                        $("#statusSubscribe").show();
+                        $("#btnSubmit").hide();
+                        $("#statusSubscribe").html("Error: Subscriber Email Already Exists.");
+                        $("#statusSubscribe").css({ 'background':'red', 'color':'#fff', 'border-radius':'12px', 'padding':'5px' });
+                    }
+                },
+                error:function(){
+                    alert("Error");
+                }
+            });
+        }
+
+        function enableSubscriber(){
+            $("#btnSubmit").show();
+            $("#statusSubscribe").hide();
+        }
+
 
     function addToCart(pro){
         $.ajax({
@@ -472,7 +600,6 @@
     }
 
     function addWishList(pro){
-
         $.ajax({
             url: "{{ route('wishlist.store') }}",
             type: "POST",
