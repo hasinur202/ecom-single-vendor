@@ -18,7 +18,6 @@ class CreateCategoriesTable extends Migration
             $table->string('cat_name',100);
             $table->string('slug',150);
             $table->string('cover');
-            $table->boolean('explor')->default(0);
             $table->boolean('status')->default(1);
             $table->timestamps();
         });

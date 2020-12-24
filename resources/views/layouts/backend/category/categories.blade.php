@@ -121,9 +121,6 @@
                                         Category Cover
                                     </th>
                                     <th class="sorting" style="width: 204px;">
-                                        Explor
-                                    </th>
-                                    <th class="sorting" style="width: 204px;">
                                         Status
                                     </th>
                                     <th class="sorting" style="width: 99px;">
@@ -139,13 +136,6 @@
                                             <td class="sorting_1">
                                             <img style="width: 100%;
                                             height: 39px;" src="{{ asset('/images/' . $cat->cover) }}" alt="">
-                                            </td>
-                                            <td>
-                                                @if ($cat->explor == 0)
-                                                <p style="cursor: pointer;" onclick="active({{$cat->id}})" class="badge badge-warning">Inactive</p>
-                                                @else
-                                                <p style="cursor: pointer;" onclick="inactive({{$cat->id}})" class="badge badge-info">Active</p>
-                                                @endif
                                             </td>
                                             <td>
                                                 <p class="badge badge-success">Active</p>
@@ -318,42 +308,6 @@
                 },
                 success: function(response) {
                     window.location.reload();
-                }
-            });
-        }
-
-        function active(id){
-            $.ajax({
-                url: "{{ route('category.active') }}",
-                type: "POST",
-                data: {
-                    "_token": "{{ csrf_token() }}",
-                    id: id
-                },
-                success: function(response) {
-                    window.location.reload();
-                    Toast.fire({
-                        icon:'success',
-                        title:'Category explore successfull.'
-                    });
-                }
-            });
-        }
-
-        function inactive(id){
-            $.ajax({
-                url: "{{ route('category.inactive') }}",
-                type: "POST",
-                data: {
-                    "_token": "{{ csrf_token() }}",
-                    id: id
-                },
-                success: function(response) {
-                    window.location.reload();
-                    Toast.fire({
-                        icon:'success',
-                        title:'Category inactive successfull.'
-                    });
                 }
             });
         }

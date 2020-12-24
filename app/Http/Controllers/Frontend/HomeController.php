@@ -31,6 +31,10 @@ class HomeController extends Controller
         $count = WishList::select('id')->where('user_id',auth()->user()->id ?? '')->count();
         $count1 = Cart::select('id')->where('user_id',auth()->user()->id ?? '')->count();
         $products = Product::with('get_product_avatars','get_attribute')->get();
+        $all_product = Product::with('get_product_avatars','get_attribute')
+        ->where('position','just for you')
+        ->limit(12)
+        ->get();
         
         return view('layouts.frontend.home',[
             'categories'=>$categories,
@@ -40,6 +44,7 @@ class HomeController extends Controller
             'count1'=>$count1,
             'banars'=>$banars,
             'products'=>$products,
+            'all_product'=>$all_product,
             'ads'=>$ads,
         ]);
     }
@@ -268,15 +273,40 @@ class HomeController extends Controller
         ]);
     }
 
-    public function create()
+    public function shop_more($data)
     {
-        //
+        $ads = AdManager::all();
+        $categories = $this->queryForCat();
+        $setting = Settings::first();
+        $cart = Cart::latest()->where('user_id',auth()->user()->id ?? '')->get();
+        $count = WishList::select('id')->where('user_id',auth()->user()->id ?? '')->count();
+        $count1 = Cart::select('id')->where('user_id',auth()->user()->id ?? '')->count();
+        $products = Product::with('get_product_avatars','get_attribute')
+        ->where('position',$data)
+        ->get();
+        
+        return view('layouts.frontend.show_more_product',[
+            'categories'=>$categories,
+            'setting'=>$setting,
+            'cart'=>$cart,
+            'count'=>$count,
+            'count1'=>$count1,
+            'products'=>$products,
+            'ads'=>$ads,
+        ]);
     }
 
 
-    public function store(Request $request)
+    public function load_more(Request $request)
     {
-        //
+        $all_product = Product::with('get_product_avatars','get_attribute')
+        ->where('position','just for you')
+        ->limit($request->len+$request->val)
+        ->get();
+
+        return view('layouts.frontend.load_more',[
+            'all_product'=>$all_product
+        ]);
     }
 
     public function show($id)

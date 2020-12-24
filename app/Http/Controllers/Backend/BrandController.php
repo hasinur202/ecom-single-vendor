@@ -9,6 +9,7 @@ use App\Models\Brand;
 use App\Models\SubChildCategory;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Validator;
+use Image;
 
 class BrandController extends Controller
 {
@@ -45,52 +46,32 @@ class BrandController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'brand_name' => 'required|unique:"brands"'
+            'brand_name' => 'required|unique:"brands"',
+            'logo' => 'required'
 
         ]);
 
         if ($validator->fails()) {
-            if ($validator->messages()->all()[0] == "The brand name has already been taken.") {
-                Alert::warning('Opps!','Brand name already taken.');
-                return redirect()->back();
-            }else{
-                Alert::warning('Opps!','Please fillup all field.');
-                return redirect()->back();
-            }
+            return response()->json([
+                'msg'=>'error'
+            ],500);
         }else{
-            Brand::create([
+            $image = $request->file('logo');
+            $new_name = rand() . '.' . $image->getClientOriginalExtension();
+            $img = Image::make($request->file('logo'));
+            $upload_path = public_path()."/images/";
 
+            Brand::create([
                 'brand_name'=>$request->brand_name,
                 'slug'=> Str::slug($request->brand_name),
+                'logo'=>$new_name,
                 'br_description'=>$request->br_description
             ]);
+            $img->save($upload_path.$new_name);
         }
-
-
-
-        // if ($request->category_id && $request->child_category_id && $request->sub_child_category_id) {
-
-        // }elseif($request->category_id && !$request->child_category_id && !$request->sub_child_category_id){
-        //     Brand::create([
-        //         'category_id'=>$request->category_id,
-        //         'brand_name'=>$request->brand_name,
-        //         'slug'=> $request->brand_name,
-        //         'br_description'=>$request->br_description
-        //     ]);
-        // }elseif($request->category_id && $request->child_category_id && !$request->sub_child_category_id){
-        //     Brand::create([
-        //         'category_id'=>$request->category_id,
-        //         'child_category_id'=>$request->child_category_id,
-        //         'brand_name'=>$request->brand_name,
-        //         'slug'=> $request->brand_name,
-        //         'br_description'=>$request->br_description
-        //     ]);
-        // }
-
-
-        toast('Brand Upload successfully','success')->padding('10px')->width('270px')->timerProgressBar()->hideCloseButton();
-
-        return redirect()->back();
+        return response()->json([
+            'msg'=>'success'
+        ],200);
     }
 
     /**
@@ -124,9 +105,9 @@ class BrandController extends Controller
      */
     public function update(Request $request)
     {
+        $brand = Brand::where('id',$request->brand_id)->first();
         $validator = Validator::make($request->all(), [
             'brand_name' => 'required',
-            'description' => 'required'
 
         ]);
 
@@ -135,11 +116,29 @@ class BrandController extends Controller
                 'msg'=>'error'
             ],500);
         }else{
-            Brand::where('id',$request->id)->update([
-                'brand_name'=>$request->brand_name,
-                'slug'=> Str::slug($request->brand_name),
-                'br_description'=>$request->description
-            ]);
+            if ($request->file('logo') != null) {
+                
+                $image = $request->file('logo');
+                $new_name = rand() . '.' . $image->getClientOriginalExtension();
+                $img = Image::make($request->file('logo'));
+                $upload_path = public_path()."/images/";
+                
+                Brand::where('id',$request->brand_id)->update([
+                    'brand_name'=>$request->brand_name,
+                    'logo'=>$new_name,
+                    'slug'=> Str::slug($request->brand_name),
+                    'br_description'=>$request->description
+                ]);
+                \File::delete(public_path('images/' . $brand->logo));
+                $img->save($upload_path.$new_name);
+            }else{
+                Brand::where('id',$request->brand_id)->update([
+                    'brand_name'=>$request->brand_name,
+                    'slug'=> Str::slug($request->brand_name),
+                    'br_description'=>$request->description
+                ]);
+            }
+            
 
             return response()->json([
                 'msg'=>'success'

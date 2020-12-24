@@ -162,25 +162,6 @@ class CategoryController extends Controller
         }
     }
 
-    public function active(Request $request)
-    {
-        $category = Category::find($request->id);
-        $category->explor = 1;
-        $category->save();
-        return response()->json([
-            'message'=>'success'
-        ],200);
-    }
-    public function inactive(Request $request)
-    {
-        $category = Category::find($request->id);
-        $category->explor = 0;
-        $category->save();
-        
-        return response()->json([
-            'message'=>'success'
-        ],200);
-    }
     public function destroy(Request $request)
     {
         $category = Category::find($request->id);

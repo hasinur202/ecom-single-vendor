@@ -197,7 +197,7 @@
             <h2>Idea Tech Mall</h2>
             <span>Products</span>
             <div style="text-align: right;">
-                <a href="#" class="btn_outline">Shop More</a>
+                <a href="{{url('shop-more/own mall')}}" class="btn_outline">Shop More</a>
             </div>
         </div>
         <div class="row small-gutters">
@@ -242,7 +242,7 @@
             <h2>Upcoming</h2>
             <span>Products</span>
             <div style="text-align: right;">
-                <a href="#" class="btn_outline">Shop More</a>
+                <a href="{{url('shop-more/upcoming product')}}" class="btn_outline">Shop More</a>
             </div>
         </div>
         <div class="row small-gutters">
@@ -307,7 +307,7 @@
             <h2>Global</h2>
             <span>Products</span>
             <div style="text-align: right;">
-                <a href="#" class="btn_outline">Shop More</a>
+                <a href="{{url('shop-more/global product')}}" class="btn_outline">Shop More</a>
             </div>
         </div>
         <div class="row small-gutters">
@@ -352,42 +352,11 @@
             <h2>Just For You</h2>
             <span>Products</span>
         </div>
-        <div class="row small-gutters">
-            @foreach ($products as $product)
-            @if ($product->position == "just for you")
-            <div class="col-6 col-md-4 col-xl-2">
-                <div class="grid_item">
-                    @foreach ($product->get_product_avatars as $avtr)
-                    <figure>
-                        <a href="{{ route('quick',$product->slug) }}">
-                            <img style="    height: 200px !important;
-                            width: 100% !important;" class="img-fluid lazy" src="{{asset('/images/'.$avtr->front)}}" data-src="{{asset('/images/'.$avtr->front)}}" alt="">
-                            <img style="    height: 200px !important;
-                            width: 100% !important;" class="img-fluid lazy" src="{{asset('/images/'.$avtr->front)}}" data-src="{{asset('/images/'.$avtr->front)}}" alt="">
-                        </a>
-                    </figure>
-                    @endforeach
-                    <div class="rating"><i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star"></i></div>
-                    <a href="product-detail-1.html">
-                        <h3>{{$product->product_name}}</h3>
-                    </a>
-                    <div class="price_box">
-                        @foreach ($product->get_attribute->unique('product_id') as $attr)
-                            <span class="new_price">{{$attr->sale_price}}</span>
-                            <span class="old_price">{{$attr->promo_price}}</span>
-                        @endforeach
-                    </div>
-                    <ul>
-                        <li><a href="#0" onclick="addWishList({{$product}})" class="tooltip-1" data-toggle="tooltip" data-placement="left" title="Add to favorites"><i class="ti-heart"></i><span>Add to favorites</span></a></li>
-                        <li><a href="#0" onclick="addToCart({{$product}})" class="tooltip-1" data-toggle="tooltip" data-placement="left" title="Add to cart"><i class="ti-shopping-cart"></i><span>Add to cart</span></a></li>
-                    </ul>
-                </div>
-            </div>
-            @endif
-            @endforeach
+        <div class="row small-gutters" id="load_more">
+            @include('layouts.frontend.load_more')
         </div>
         <div style="text-align: center;">
-            <a href="#" class="btn_1">Load More</a>
+            <button onclick="loadMore()" class="btn_1">Load More</button>
 
         </div>
     </div>
@@ -444,8 +413,32 @@
 @section('js')
 
 <script>
+    function loadMore(){
+        $.ajax({
+            url: "{{ route('load.more') }}",
+            type: "POST",
+            dataType:"html",
+            data: {
+                "_token": "{{ csrf_token() }}",
+                'val': 12,
+                'len':$("#len").val()
+            },
+            success:function(response)
+            {
+                $("#load_more").html(response);
+            },
+            error: function(e) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'You are not logged in!'
+                })
+                
+            }
+        })
+    }
 
-function addToCart(pro){
+    function addToCart(pro){
         $.ajax({
             url: "{{ route('cart.store') }}",
             type: "POST",

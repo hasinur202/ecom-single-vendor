@@ -63,8 +63,6 @@ Route::group(["namespace"=>"Backend"],function() {
         Route::post('create-category', 'CategoryController@store')->name('category.add');
         Route::post('update-category', 'CategoryController@update')->name('category.update');
         Route::post('delete-category', 'CategoryController@destroy')->name('category.delete');
-        Route::post('active-category', 'CategoryController@active')->name('category.active');
-        Route::post('inactive-category', 'CategoryController@inactive')->name('category.inactive');
         //sub cat
         Route::get('sub-categories', 'ChildCategoryController@index')->name('child.category');
         Route::post('sub-category-create', 'ChildCategoryController@store')->name('child.add');
@@ -186,15 +184,12 @@ Route::group(["namespace"=>"Frontend"],function() {
 
     //search product
     Route::post('search', 'HomeController@search')->name('search');
-    // Route::post('{optional?}/search', 'HomeController@search');
-    // Route::post('{optional?}/{param?}/search', 'HomeController@search');
-    //
-
-    // Route::post('{params?}/search-data', 'HomeController@get_result');
-    // Route::post('{params?}/{par?}/search-data', 'HomeController@get_result');
-    // Route::post('{params?}/{par?}/{param1?}/search-data', 'HomeController@get_result');
-    // Route::get('search-result/search-product-by-brand/{id}', 'HomeController@search_product_by_brand');
     Route::post('load/{item}', 'HomeController@load')->name('load');
+
+    //shop more route...
+    Route::get('shop-more/{data}', 'HomeController@shop_more')->name('shop.more');
+    Route::post('load-more-products', 'HomeController@load_more')->name('load.more');
+
     //Subscriber
     Route::post('check-subscriber-email','NewsletterController@checkSubscriber');
     Route::post('add-subscriber','NewsletterController@addSubscriber');
