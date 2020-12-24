@@ -75,13 +75,12 @@
                         @foreach ($product->get_product_avatars as $avtr)
                         <figure>
                             <a href="{{ route('quick',$product->slug) }}">
-                                <img style="height: 200px !important;
-                                width: 100% !important;" class="owl-lazy" src="{{asset('/images/'.$avtr->front)}}" data-src="{{asset('/images/'.$avtr->front)}}" alt="">
+                                <img class="owl-lazy resp_img_pro" src="{{asset('/images/'.$avtr->front)}}" data-src="{{asset('/images/'.$avtr->front)}}" alt="">
                             </a>
                         </figure>
                         @endforeach
                         <div class="rating"><i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star"></i></div>
-                        <a href="product-detail-1.html">
+                        <a href="{{ route('quick',$product->slug) }}">
                             <h3>Air Wildwood ACG</h3>
                         </a>
                         <div class="price_box">
@@ -239,27 +238,25 @@
         <div class="main_title">
             <h2>Idea Tech Mall</h2>
             <span>Products</span>
-            <div style="text-align: right;">
+            <div class="shop_more">
                 <a href="#" class="btn_outline">Shop More</a>
             </div>
         </div>
         <div class="row small-gutters">
             @foreach ($products as $product)
             @if ($product->position == "own mall")
-            <div class="col-6 col-md-4 col-xl-2">
+            <div class="col-4 col-md-2 col-xl-2">
                 <div class="grid_item">
                     @foreach ($product->get_product_avatars as $avtr)
                     <figure>
                         <a href="{{ route('quick',$product->slug) }}">
-                            <img style="    height: 200px !important;
-                            width: 100% !important;" class="img-fluid lazy" src="{{asset('/images/'.$avtr->front)}}" data-src="{{asset('/images/'.$avtr->front)}}" alt="">
-                            <img style="    height: 200px !important;
-                            width: 100% !important;" class="img-fluid lazy" src="{{asset('/images/'.$avtr->front)}}" data-src="{{asset('/images/'.$avtr->front)}}" alt="">
+                            <img class="img-fluid lazy resp_img_pro" src="{{asset('/images/'.$avtr->front)}}" data-src="{{asset('/images/'.$avtr->front)}}" alt="">
+                            <img class="img-fluid lazy resp_img_pro" src="{{asset('/images/'.$avtr->front)}}" data-src="{{asset('/images/'.$avtr->front)}}" alt="">
                         </a>
                     </figure>
                     @endforeach
                     <div class="rating"><i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star"></i></div>
-                    <a href="product-detail-1.html">
+                    <a href="{{ route('quick',$product->slug) }}">
                         <h3>{{$product->product_name}}</h3>
                     </a>
                     <div class="price_box">
@@ -284,27 +281,26 @@
         <div class="main_title">
             <h2>Upcoming</h2>
             <span>Products</span>
-            <div style="text-align: right;">
+            <div class="shop_more">
                 <a href="#" class="btn_outline">Shop More</a>
             </div>
         </div>
         <div class="row small-gutters">
             @foreach ($products as $product)
             @if ($product->position == "upcoming product")
-            <div class="col-6 col-md-4 col-xl-2">
+            <div class="col-4 col-md-2 col-xl-2">
                 <div class="grid_item">
                     @foreach ($product->get_product_avatars as $avtr)
                     <figure>
                         <a href="{{ route('quick',$product->slug) }}">
-                            <img style="    height: 200px !important;
-                            width: 100% !important;" class="img-fluid lazy" src="{{asset('/images/'.$avtr->front)}}" data-src="{{asset('/images/'.$avtr->front)}}" alt="">
-                            <img style="    height: 200px !important;
-                            width: 100% !important;" class="img-fluid lazy" src="{{asset('/images/'.$avtr->front)}}" data-src="{{asset('/images/'.$avtr->front)}}" alt="">
+                            <img class="img-fluid lazy resp_img_pro" src="{{asset('/images/'.$avtr->front)}}" data-src="{{asset('/images/'.$avtr->front)}}" alt="">
+
+                            <img class="img-fluid lazy resp_img_pro" src="{{asset('/images/'.$avtr->back)}}" data-src="{{asset('/images/'.$avtr->front)}}" alt="">
                         </a>
                     </figure>
                     @endforeach
                     <div class="rating"><i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star"></i></div>
-                    <a href="product-detail-1.html">
+                    <a href="{{ route('quick',$product->slug) }}">
                         <h3>{{$product->product_name}}</h3>
                     </a>
                     <div class="price_box">
@@ -349,27 +345,25 @@
         <div class="main_title">
             <h2>Global</h2>
             <span>Products</span>
-            <div style="text-align: right;">
+            <div class="shop_more">
                 <a href="#" class="btn_outline">Shop More</a>
             </div>
         </div>
         <div class="row small-gutters">
             @foreach ($products as $product)
             @if ($product->position == "global product")
-            <div class="col-6 col-md-4 col-xl-2">
+            <div class="col-4 col-md-2 col-xl-2">
                 <div class="grid_item">
                     @foreach ($product->get_product_avatars as $avtr)
                     <figure>
                         <a href="{{ route('quick',$product->slug) }}">
-                            <img style="    height: 200px !important;
-                            width: 100% !important;" class="img-fluid lazy" src="{{asset('/images/'.$avtr->front)}}" data-src="{{asset('/images/'.$avtr->front)}}" alt="">
-                            <img style="    height: 200px !important;
-                            width: 100% !important;" class="img-fluid lazy" src="{{asset('/images/'.$avtr->front)}}" data-src="{{asset('/images/'.$avtr->front)}}" alt="">
+                            <img class="img-fluid lazy resp_img_pro" src="{{asset('/images/'.$avtr->front)}}" data-src="{{asset('/images/'.$avtr->front)}}" alt="">
+                            <img class="img-fluid lazy resp_img_pro" src="{{asset('/images/'.$avtr->front)}}" data-src="{{asset('/images/'.$avtr->front)}}" alt="">
                         </a>
                     </figure>
                     @endforeach
                     <div class="rating"><i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star"></i></div>
-                    <a href="product-detail-1.html">
+                    <a href="{{ route('quick',$product->slug) }}">
                         <h3>{{$product->product_name}}</h3>
                     </a>
                     <div class="price_box">
@@ -398,20 +392,18 @@
         <div class="row small-gutters">
             @foreach ($products as $product)
             @if ($product->position == "just for you")
-            <div class="col-6 col-md-4 col-xl-2">
+            <div class="col-4 col-md-2 col-xl-2">
                 <div class="grid_item">
                     @foreach ($product->get_product_avatars as $avtr)
                     <figure>
                         <a href="{{ route('quick',$product->slug) }}">
-                            <img style="    height: 200px !important;
-                            width: 100% !important;" class="img-fluid lazy" src="{{asset('/images/'.$avtr->front)}}" data-src="{{asset('/images/'.$avtr->front)}}" alt="">
-                            <img style="    height: 200px !important;
-                            width: 100% !important;" class="img-fluid lazy" src="{{asset('/images/'.$avtr->front)}}" data-src="{{asset('/images/'.$avtr->front)}}" alt="">
+                            <img class="img-fluid lazy resp_img_pro" src="{{asset('/images/'.$avtr->front)}}" data-src="{{asset('/images/'.$avtr->front)}}" alt="">
+                            <img class="img-fluid lazy resp_img_pro" src="{{asset('/images/'.$avtr->front)}}" data-src="{{asset('/images/'.$avtr->front)}}" alt="">
                         </a>
                     </figure>
                     @endforeach
                     <div class="rating"><i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star"></i></div>
-                    <a href="product-detail-1.html">
+                    <a href="{{ route('quick',$product->slug) }}">
                         <h3>{{$product->product_name}}</h3>
                     </a>
                     <div class="price_box">
@@ -430,7 +422,9 @@
             @endforeach
         </div>
         <div style="text-align: center;">
-            <a href="#" class="btn_1">Load More</a>
+            <a href="#" style="border: 1px solid #ddd;
+            color: #fff;
+            padding: 6px 13px;" class="btn_1">Load More</a>
 
         </div>
     </div>

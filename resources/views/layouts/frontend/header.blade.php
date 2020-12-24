@@ -77,12 +77,50 @@
         .brnd_hght{
             height: 90px;
         }
+        .resp_img_pro{
+            height: 200px !important;
+            width: 100% !important;
+        }
+        .shop_more{
+            text-align: right;
+        }
+
 
         @media (max-width: 600px){
             header .main_header #logo a img {
                 height: 30px;
                 width: auto;
                 padding:0px;
+            }
+            .grid_item{
+                height: 200px !important;
+            }
+            .grid_item a h3{
+                font-size: 0.7rem !important;
+            }
+            .grid_item ul{
+                display: none;
+            }
+            .new_price{
+                font-size: 12px !important;
+            }
+            .old_price{
+                font-size: 12px !important;
+            }
+            .resp_img_pro{
+                height: 80px !important;
+                width: 100% !important;
+            }
+            .shop_more{
+                text-align: center;
+            }
+
+            .btn_outline {
+                padding: 1px 6px;
+                background: #fff;
+                color: #333;
+                border: 1px solid #ddd;
+                font-size: 12px;
             }
 
             .brnd_hght{
