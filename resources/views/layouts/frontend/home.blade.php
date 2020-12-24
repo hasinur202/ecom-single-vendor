@@ -63,7 +63,7 @@
         <div class="main_title">
             <h2>Flash Sale</h2>
             <span>Products</span>
-            <h4 style="text-align: left; font-size:20px; position: absolute; color: darkslateblue;">End In</h4>
+            <h4 style="text-align: left; font-size:16px; position: absolute; color: darkslateblue;">Ending In</h4>
             <div data-countdown="2020/12/30" class="countdown">aedfa sdf</div>
         </div>
         <div class="owl-carousel owl-theme products_carousel">
@@ -141,20 +141,27 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-6">
-                <a href="#">
+                @foreach ($ads as $ad)
+                @if($ad->position == "body-top left")
+                <a href="{{ $ad->link }}">
                     <figure>
-                        <img class="lazy img_ad_banner" src="/assets/img/blog-thumb-placeholder.jpg" data-src="images/612670428.jpg" alt="">
+                        <img class="lazy img_ad_banner" src="{{ asset('/images/' . $ad->avatar) }}" data-src="{{ asset('/images/' . $ad->avatar) }}" alt="ads">
                     </figure>
                 </a>
+                @endif
+                @endforeach
             </div>
             <!-- /box_news -->
             <div class="col-lg-6">
-                <a href="#">
+                @foreach ($ads as $ad)
+                @if($ad->position == "body-top right")
+                <a href="{{ $ad->link }}">
                     <figure>
-                        <img class="lazy img_ad_banner" src="/assets/img/blog-thumb-placeholder.jpg" data-src="images/2130407414.jpg" alt="">
-
+                        <img class="lazy img_ad_banner" src="{{ asset('/images/' . $ad->avatar) }}" data-src="{{ asset('/images/' . $ad->avatar) }}" alt="ads">
                     </figure>
                 </a>
+                @endif
+                @endforeach
             </div>
         </div>
     </div>
@@ -323,20 +330,27 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-6">
-                <a href="#">
+                @foreach($ads as $ad)
+                @if($ad->position == "body-bottom left")
+                <a href="{{ $ad->link }}">
                     <figure>
-                        <img src="/assets/img/blog-thumb-placeholder.jpg" data-src="images/649374269.jpg" alt="" width="600" height="160" class="lazy img_ad_banner">
+                        <img class="lazy img_ad_banner" src="{{ asset('/images/' . $ad->avatar) }}" data-src="{{ asset('/images/' . $ad->avatar) }}" alt="ads">
                     </figure>
                 </a>
+                @endif
+                @endforeach
             </div>
             <!-- /box_news -->
             <div class="col-lg-6">
-                <a href="#">
+                @foreach($ads as $ad)
+                @if($ad->position == "body-bottom right")
+                <a href="{{ $ad->link }}">
                     <figure>
-                        <img src="/assets/img/blog-thumb-placeholder.jpg" data-src="images/2130407414.jpg" alt="" width="600" height="160" class="lazy img_ad_banner">
-
+                        <img class="lazy img_ad_banner" src="{{ asset('/images/' . $ad->avatar) }}" data-src="{{ asset('/images/' . $ad->avatar) }}" alt="ads">
                     </figure>
                 </a>
+                @endif
+                @endforeach
             </div>
         </div>
     </div>
@@ -432,9 +446,32 @@
 
 
 
+    <div class="featured lazy" data-bg="url(assets/img/featured_home.jpg)" style="height: 200px !important">
+        <div class="opacity-mask d-flex align-items-center" data-opacity-mask="rgba(0, 0, 0, 0.5)">
+            <div class="container margin_60">
+                <div class="row justify-content-center justify-content-md-start">
+                    <div class="col-lg-6 wow" data-wow-offset="150">
+                        <h3>Get the Latest Deals</h3>
+                        <p>Subscribe Now</p>
+                        <form action="javascript:void(0)" type="post">
+                           {{-- {{ csrf_field() }} --}}
+                        <div id="newsletter">
+                            <div class="form-group">
+                                <input onfocus="enableSubscriber()" onfocusout="checkSubscriber()" type="email" name="subscriber_email" id="subscriber_email" style="background:#fff"
+                                class="form-control" placeholder="Your email" required>
+                                <button onclick="addSubscriber();" type="submit" id="btnSubmit"><i class="ti-angle-double-right"></i></button>
+                            </div>
+                        </div>
+                        <span id="statusSubscribe" style="display: none;"></span>
+                        </form>
 
+                    </div>
+                </div>
 
-
+            </div>
+        </div>
+    </div>
+    <!-- /featured -->
 </main>
 
 
@@ -449,7 +486,6 @@
                 </div>
             @endif
         @endforeach
-
         <div class="col-md-7">
             <div class="content">
                 <div class="wrapper">
@@ -462,8 +498,6 @@
                 @else
                     <a href="{{ url('login') }}" class="btn_1 mt-2 mb-4">Apply Now</a>
                 @endauth
-
-
                     <div class="form-group">
                         <label class="container_check d-inline">Dont show this PopUp again
                             <input type="checkbox">
@@ -481,6 +515,61 @@
 @section('js')
 
 <script>
+        function addSubscriber(){
+            var subscriber_email = $("#subscriber_email").val();
+            $.ajax({
+                type:'post',
+                url:'/add-subscriber',
+                data:{
+                    "_token":"{{ csrf_token() }}",
+                    subscriber_email:subscriber_email
+                },
+                success:function(resp){
+                    if(resp == "exists"){
+                        $("#statusSubscribe").show();
+                        $("#btnSubmit").hide();
+                        $("#statusSubscribe").html("Error: Subscriber Email Already Exists.");
+                        $("#statusSubscribe").css({ 'background':'red', 'color':'#fff', 'border-radius':'12px', 'padding':'5px' });
+                    }else if(resp == "saved"){
+                        $("#statusSubscribe").show();
+                        $("#statusSubscribe").html("Success: Thanks for Subscribing!");
+                        $("#statusSubscribe").css({ 'background':'green', 'color':'#fff', 'border-radius':'12px', 'padding':'5px' });
+                    }
+                },
+                error:function(){
+                    alert("Error");
+                }
+            });
+        }
+
+        function checkSubscriber(){
+            var subscriber_email = $("#subscriber_email").val();
+            $.ajax({
+                type:'post',
+                url:'/check-subscriber-email',
+                data:{
+                    "_token":"{{ csrf_token() }}",
+                    subscriber_email:subscriber_email
+                },
+                success:function(resp){
+                    if(resp == "exists"){
+                        $("#statusSubscribe").show();
+                        $("#btnSubmit").hide();
+                        $("#statusSubscribe").html("Error: Subscriber Email Already Exists.");
+                        $("#statusSubscribe").css({ 'background':'red', 'color':'#fff', 'border-radius':'12px', 'padding':'5px' });
+                    }
+                },
+                error:function(){
+                    alert("Error");
+                }
+            });
+        }
+
+        function enableSubscriber(){
+            $("#btnSubmit").show();
+            $("#statusSubscribe").hide();
+        }
+
 
 function addToCart(pro){
         $.ajax({
@@ -516,7 +605,6 @@ function addToCart(pro){
     }
 
     function addWishList(pro){
-
         $.ajax({
             url: "{{ route('wishlist.store') }}",
             type: "POST",

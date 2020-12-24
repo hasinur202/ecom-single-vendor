@@ -18,7 +18,7 @@
     <div class="container margin_60_35">
         <div class="row justify-content-center">
             <div class="col-xl-10 col-lg-10 col-md-12 add_bottom_25">
-                {!! htmlspecialchars_decode($about->description) !!}
+                {!! htmlspecialchars_decode( optional($about)->description) !!}
             </div>
         </div>
     </div>

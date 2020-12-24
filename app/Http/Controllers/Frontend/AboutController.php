@@ -7,6 +7,7 @@ use App\Models\About;
 use App\Models\Category;
 use App\Models\Settings;
 use App\Models\WishList;
+use App\Models\AdManager;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -20,6 +21,7 @@ class AboutController extends Controller
         $count = WishList::select('id')->where('user_id',auth()->user()->id ?? '')->count();
         $count1 = Cart::select('id')->where('user_id',auth()->user()->id ?? '')->count();
         $about = About::first();
+        $ads = AdManager::all();
 
         $setting = Settings::first();
         return view('layouts.frontend.settings.about_us',[
@@ -28,7 +30,8 @@ class AboutController extends Controller
             'cart'=>$cart,
             'count1'=>$count1,
             'setting'=>$setting,
-            'about'=>$about
+            'about'=>$about,
+            'ads'=>$ads
         ]);
     }
 

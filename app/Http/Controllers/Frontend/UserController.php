@@ -6,18 +6,19 @@ use Image;
 use session;
 use App\User;
 use App\Models\Cart;
+use App\Models\Orders;
 use App\Models\Category;
 use App\Models\Settings;
 use App\Models\WishList;
-use App\Models\OrderDetails;
+use App\Models\AdManager;
 use App\Models\Attribute;
-use App\Models\Orders;
+use App\Models\OrderDetails;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -31,13 +32,15 @@ class UserController extends Controller
         $count = WishList::select('id')->where('user_id',Auth::user()->id ?? '')->count();
         $count1 = Cart::select('id')->where('user_id',Auth::user()->id ?? '')->count();
         $cart = Cart::latest()->where('user_id',auth()->user()->id ?? '')->get();
+        $ads = AdManager::all();
 
         return view('layouts.frontend.user.login',[
             'categories'=>$categories,
             'setting'=>$setting,
             'count'=>$count,
             'count1'=>$count1,
-            'cart'=>$cart
+            'cart'=>$cart,
+            'ads'=>$ads
         ]);
     }
 
@@ -47,13 +50,15 @@ class UserController extends Controller
         $count = WishList::select('id')->where('user_id',Auth::user()->id ?? '')->count();
         $count1 = Cart::select('id')->where('user_id',Auth::user()->id ?? '')->count();
         $cart = Cart::latest()->where('user_id',auth()->user()->id ?? '')->get();
+        $ads = AdManager::all();
 
         return view('layouts.frontend.user.register',[
             'categories'=>$categories,
             'setting'=>$setting,
             'count'=>$count,
             'count1'=>$count1,
-            'cart'=>$cart
+            'cart'=>$cart,
+            'ads'=>$ads
         ]);
     }
 
@@ -66,6 +71,7 @@ class UserController extends Controller
         $userOrderDetails = OrderDetails::with('get_product');
         $orders = Orders::where('user_id',auth()->user()->id ?? '')->get();
         $cart = Cart::latest()->where('user_id',auth()->user()->id ?? '')->get();
+        $ads = AdManager::all();
 
         return view('layouts.frontend.user.profile',[
             'categories'=>$categories,
@@ -74,7 +80,8 @@ class UserController extends Controller
             'count1'=>$count1,
             'cart'=>$cart,
             'userOrderDetails'=>$userOrderDetails,
-            'orders'=>$orders
+            'orders'=>$orders,
+            'ads'=>$ads
         ]);
     }
 
@@ -129,7 +136,7 @@ class UserController extends Controller
             ]);
             toast('Update Successfull.','success')->padding('10px')->width('270px')->timerProgressBar()->hideCloseButton();
         }else{
-        
+
             if (Auth::attempt([
                 'email'=>$request->email,
                 'password'=>$request->old_password
@@ -142,7 +149,7 @@ class UserController extends Controller
                     'address'=>$request->address
                 ]);
                 toast('Update Successfull.','success')->padding('10px')->width('270px')->timerProgressBar()->hideCloseButton();
-    
+
             }else{
                 Alert::warning('Opps!','Wrong Password.');
             }
@@ -150,11 +157,11 @@ class UserController extends Controller
         return redirect()->back();
 
     }
-    
-    
+
+
     public function get_shipp_des(){
         $data = Cart::where('user_id',auth()->user()->id ?? '')->select('shipp_des')->first();
-        
+
         return response()->json([
             'data'=>$data
         ]);

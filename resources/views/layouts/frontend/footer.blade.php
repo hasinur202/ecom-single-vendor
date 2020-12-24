@@ -32,7 +32,7 @@
             <div class="col-lg-3 col-md-6">
                   <h3 data-target="#collapse_4">Follow Us</h3>
                 <div class="collapse dont-collapse-sm" id="collapse_4">
-                
+
                     <div class="follow_us">
                         <ul>
                             <li><a href="{{ optional($setting)->twitt_link }}" target="_blank">
@@ -97,6 +97,12 @@
             toast.addEventListener('mouseleave', Swal.resumeTimer)
         }
     })
+</script>
+
+<script>
+    function closeAdd(){
+        $(".adds_top_div").css({'display':'none'});
+    }
 </script>
 
 @yield('js')

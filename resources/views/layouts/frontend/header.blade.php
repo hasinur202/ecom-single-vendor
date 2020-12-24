@@ -36,6 +36,26 @@
 
     <style>
 
+        .adds_top_div{
+            background: #3b495e;
+        }
+        .mfp_close{
+            overflow: visible;
+            position: absolute;
+            right: 2rem;
+            top: 1rem;
+            border: 1px solid #ddd;
+            background: red;
+            border-radius:13px;
+            cursor: pointer;
+        }
+
+        .top_ads a img{
+            width: 100%;
+            height: 65px;
+            position: relative;
+        }
+
 
         header .main_header #logo a img {
             padding: 10px; width: 140px; height: 51px;
@@ -92,6 +112,16 @@
                 width: auto;
                 padding:0px;
             }
+
+            .mfp_close {
+                right: 1rem !important;
+                top: 0.5rem !important;
+                background: #ff000069 !important;
+            }
+            .top_ads a img{
+                height: 50px !important;
+            }
+
             .grid_item{
                 height: 200px !important;
             }
@@ -240,11 +270,24 @@
 </head>
 
 <body>
+<div id="page">
+    <header class="version_2">
+        <div class="adds_top_div" id="addd-top">
+            @foreach ($ads as $ad)
+            @if ($ad->position == 'top')
+            <div class="container text-center top_ads">
+                <a href="{{$ad->link}}">
+                    <img src="{{ asset('/images/' . $ad->avatar) }}">
+                </a>
+                    <button onclick="closeAdd()" title="Close (Esc)" class="mfp_close" type="button">
+                        <i style="color: #fff" class="fa fa-times"></i>
+                    </button>
+                </div>
+                @endif
+            @endforeach
+        </div>
 
-	<div id="page">
-
-	<header class="version_2">
-		<div class="layer"></div>
+        <div class="layer"></div>
 		<div class="main_header">
 			<div class="container">
 				<div class="row small-gutters">
@@ -389,7 +432,7 @@
                                             <strong style="background: red;"></strong>
                                         </a>
                                     @endauth
-									<div class="dropdown-menu">
+                                    <div class="dropdown-menu">
                                         @auth
                                         <a href="{{ route('user.logout') }}" class="btn_1">Sign Out</a>
                                         @else
@@ -397,21 +440,20 @@
                                         @endauth
 										@auth
 										<ul>
+                                            @if(auth()->user()->type == 'super_admin' )
 											<li>
-												<a href="#"><i class="ti-truck"></i>Track your Order</a>
-											</li>
+												<a href="{{ route('dashboard') }}"><i class="fa fa-tachometer"></i>Admin Dashboard</a>
+                                            </li>
+                                            @endif
 											<li>
 												<a href="{{ route('user.profile') }}"><i class="ti-package"></i>My Orders</a>
 											</li>
 											<li>
 												<a href="{{ route('user.profile') }}"><i class="ti-user"></i>My Profile</a>
 											</li>
-											<li>
-												<a href="help.html"><i class="ti-help-alt"></i>Help and Faq</a>
-											</li>
 										</ul>
 										@endauth
-									</div>
+                                    </div>
 								</div>
 								<!-- /dropdown-access-->
 							</li>
