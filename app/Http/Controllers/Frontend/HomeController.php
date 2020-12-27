@@ -14,6 +14,7 @@ use App\Models\Attribute;
 use App\Models\Cart;
 use App\Models\ChildCategory;
 use App\Models\SubChildCategory;
+use App\Models\Brand;
 class HomeController extends Controller
 {
 
@@ -35,6 +36,7 @@ class HomeController extends Controller
         ->where('position','just for you')
         ->limit(12)
         ->get();
+        $brands = Brand::all();
         
         return view('layouts.frontend.home',[
             'categories'=>$categories,
@@ -46,6 +48,7 @@ class HomeController extends Controller
             'products'=>$products,
             'all_product'=>$all_product,
             'ads'=>$ads,
+            'brands'=>$brands
         ]);
     }
 
@@ -296,6 +299,30 @@ class HomeController extends Controller
         ->get();
         
         return view('layouts.frontend.show_more_product',[
+            'categories'=>$categories,
+            'setting'=>$setting,
+            'cart'=>$cart,
+            'count'=>$count,
+            'count1'=>$count1,
+            'products'=>$products,
+            'ads'=>$ads,
+        ]);
+    }
+
+    public function product_by_brand($data)
+    {
+        $ads = AdManager::all();
+        $categories = $this->queryForCat();
+        $setting = Settings::first();
+        $cart = Cart::latest()->where('user_id',auth()->user()->id ?? '')->get();
+        $count = WishList::select('id')->where('user_id',auth()->user()->id ?? '')->count();
+        $count1 = Cart::select('id')->where('user_id',auth()->user()->id ?? '')->count();
+        $products = Product::with('get_product_avatars','get_attribute','get_brand')
+        ->whereHas('get_brand',function($q) use($data){
+            $q->where('slug',$data);
+        })
+        ->get();
+        return view('layouts.frontend.product_by_brand',[
             'categories'=>$categories,
             'setting'=>$setting,
             'cart'=>$cart,

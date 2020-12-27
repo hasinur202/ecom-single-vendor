@@ -106,30 +106,11 @@
                 <h2>Shop By Brand</h2><span>Products</span>
             </div>
             <div id="brands" class="owl-carousel owl-theme bg_gray">
+                @foreach ($brands as $item)
                 <div class="item">
-                    <a href="#0"><img src="assets/img/brands/placeholder_brands.png" data-src="assets/img/brands/logo_1.png" alt="" class="brnd_hght owl-lazy"></a>
+                    <a href="{{route('product.by.brand',$item->slug)}}"><img src="{{asset('/images/'.$item->logo)}}" data-src="{{asset('/images/'.$item->logo)}}" alt="" class="brnd_hght owl-lazy"></a>
                 </div>
-                <!-- /item -->
-                <div class="item">
-                    <a href="#0"><img src="assets/img/brands/placeholder_brands.png" data-src="assets/img/brands/logo_2.png" alt="" class="brnd_hght owl-lazy"></a>
-                </div>
-                <!-- /item -->
-                <div class="item">
-                    <a href="#0"><img src="assets/img/brands/placeholder_brands.png" data-src="assets/img/brands/logo_3.png" alt="" class="brnd_hght owl-lazy"></a>
-                </div>
-                <!-- /item -->
-                <div class="item">
-                    <a href="#0"><img src="assets/img/brands/placeholder_brands.png" data-src="assets/img/brands/logo_4.png" alt="" class="brnd_hght owl-lazy"></a>
-                </div>
-                <!-- /item -->
-                <div class="item">
-                    <a href="#0"><img src="assets/img/brands/placeholder_brands.png" data-src="assets/img/brands/logo_5.png" alt="" class="brnd_hght owl-lazy"></a>
-                </div>
-                <!-- /item -->
-                <div class="item">
-                    <a href="#0"><img src="assets/img/brands/placeholder_brands.png" data-src="assets/img/brands/logo_6.png" alt="" class="brnd_hght owl-lazy"></a>
-                </div>
-                <!-- /item -->
+                @endforeach
             </div>
             <!-- /carousel -->
         </div>

@@ -190,6 +190,10 @@ Route::group(["namespace"=>"Frontend"],function() {
     Route::get('shop-more/{data}', 'HomeController@shop_more')->name('shop.more');
     Route::post('load-more-products', 'HomeController@load_more')->name('load.more');
 
+    //product show by brand routes....
+    Route::get('products/{data}', 'HomeController@product_by_brand')->name('product.by.brand');
+    // Route::post('load-more-products', 'HomeController@load_more')->name('load.more');
+
     //Subscriber
     Route::post('check-subscriber-email','NewsletterController@checkSubscriber');
     Route::post('add-subscriber','NewsletterController@addSubscriber');
