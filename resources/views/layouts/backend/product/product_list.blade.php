@@ -141,6 +141,7 @@
                                     >Select Position</label
                                     >
                                     <select class="form-control" name="position" id="position">
+                                        <option value="" selected="selected">select position</option>
                                         <option value="flash sale">flash sale</option>
                                         <option value="upcoming product">upcoming product</option>
                                         <option value="just for you">just for you</option>
@@ -363,6 +364,9 @@
                                     </th>
                                     <th>
                                         Color
+                                    </th>
+                                    <th>
+                                        Flash Timing
                                     </th>
                                     <th>
                                         Status
@@ -622,6 +626,54 @@
 
             })
         })
+
+        function updateFlashSale() {
+
+            $.ajax({
+                url: "{{ route('product.flash.update') }}",
+                type: "POST",
+                data: {
+                    "_token": "{{ csrf_token() }}",
+                    "flash_timing": $("#dateTime").val() ? $("#dateTime").val() : ''
+                },
+                success: function(response) {
+                    window.location.reload();
+
+                }
+            })
+        }
+
+        function getData() {
+            var countDownDate = new Date(document.getElementById("date").value + " " + document.getElementById("time")
+                .value).getTime();
+
+            document.getElementById("dateTime").value = countDownDate;
+        }
+
+        function addToFlash(id){
+            $.ajax({
+                url: "{{ route('add.to.flash') }}",
+                type: "POST",
+                data: {
+                    "_token": "{{ csrf_token() }}",
+                    "val": id
+                },
+                success: function(response) {
+                    window.location.reload();
+                    Toast.fire({
+                        icon:'success',
+                        title:'Product add to flash sale successfull.'
+                    });
+
+                },
+                error:function(){
+                    Swal.fire({
+                        icon:'warning',
+                        title:"ERROR"
+                    });
+                }
+            })
+        }
 
     </script>
 @endsection

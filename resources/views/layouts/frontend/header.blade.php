@@ -50,6 +50,35 @@
             cursor: pointer;
         }
 
+        .des-time{
+            width: 21%;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            text-align: center;
+            margin-left: .466rem;
+            background-color: red;
+        }
+
+
+        .fa.fa-clock-o{
+            font-size: 40px;
+            margin-top: 3px;
+            position: absolute;
+            left: 3px;
+            color: red;
+            margin-left: 5px;
+        }
+
+        .clock{
+            display: inline-flex;
+            color: white;
+            width: 250px;
+            padding: 5px 5px 5px 40px;
+            border-radius: 5px;
+            position: relative;
+            left: -34%;
+        }
+
         .top_ads a img{
             width: 100%;
             height: 65px;

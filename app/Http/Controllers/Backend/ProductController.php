@@ -187,4 +187,65 @@ class ProductController extends Controller
 
         return redirect()->back();
     }
+
+    public function flash_update(Request $request)
+    {
+        $flash_status = Product::where('flash_status',1)->first();
+        if ($request->flash_timing != null && !$flash_status) {
+            Product::where('position','flash sale')->update([
+                'flash_timing'=>$request->flash_timing,
+                'flash_status'=>1
+            ]);
+            toast('Product flash sale timing running successfully','success')->padding('10px')->width('270px')->timerProgressBar()->hideCloseButton();
+
+            return response()->json([
+                'msg'=>'success'
+            ]);
+        }elseif($request->flash_timing != null && $flash_status){
+            Product::where('position','flash sale')
+                ->whereNull('flash_timing')
+                ->whereNull('flash_status')
+                ->update([
+                'flash_timing'=>$request->flash_timing,
+                'flash_status'=>0
+            ]);
+            Alert::warning('Warning','Product already in flash sale.Try again later.');
+            return response()->json([
+                'msg'=>'success'
+            ]);
+        }else{
+            Product::where([
+                'position'=>'flash sale',
+                'flash_status'=>1,
+            ])->update([
+                'flash_timing'=>null,
+                'flash_status'=>null,
+                'position'=>null
+            ]);
+
+            Product::where([
+                'position'=>'flash sale',
+                'flash_status'=>0,
+            ])->update([
+                'flash_status'=>1
+            ]);
+
+            return response()->json([
+                'msg'=>'success'
+            ]);
+        }
+
+    }
+
+
+    public function add_to_flash(Request $request)
+    {
+        Product::where('id',$request->val)->update([
+            'position'=>'flash sale'
+        ]);
+
+        return response()->json([
+            'msg'=>'success'
+        ],200);
+    }
 }
