@@ -94,7 +94,8 @@ Route::group(["namespace"=>"Backend"],function() {
         Route::post('product-delete/{id}', 'ProductController@destroy')->name('product.delete');
         Route::post('product-flash-update', 'ProductController@flash_update')->name('product.flash.update');
         Route::post('product-status', 'ProductController@product_status')->name('product.status');
-
+        Route::post('product-add-to-flash', 'ProductController@add_to_flash')->name('add.to.flash');
+        
         //product avatars
         Route::get('products/avatars', 'ProductAvatarController@index')->name('avatars');
         Route::get('products/avatars/{slug}', 'ProductAvatarController@show')->name('product.avatars');

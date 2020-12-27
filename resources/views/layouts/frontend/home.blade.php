@@ -38,6 +38,7 @@
                 </div>
             </a>
         </li>
+        
         <li>
             <a href="#0" class="img_container">
                 <img src="assets/img/banners_cat_placeholder.jpg" data-src="assets/img/banner_2.jpg" alt="" class="lazy">
@@ -46,6 +47,7 @@
                     <div><span class="btn_1">Shop Now</span></div>
                 </div>
             </a>
+            
         </li>
         <li>
             <a href="#0" class="img_container">
@@ -58,18 +60,39 @@
         </li>
     </ul>
 
-
-    <div class="container margin_60_35">
+    {{-- @foreach ($products as $product)
+    @if($product->flash_timing != null && $product->flash_status == 1) --}}
+    <div class="container margin_60_35" id="flash">
         <div class="main_title">
             <h2>Flash Sale</h2>
             <span>Products</span>
-            <h4 style="text-align: left; font-size:16px; position: absolute; color: darkslateblue;">Ending In</h4>
-            <div data-countdown="2020/12/30" class="countdown">aedfa sdf</div>
+            <h4 style="margin-top: 15px;text-align: left; font-size:16px; position: absolute; color: darkslateblue;">Ending In</h4>
+            {{-- <div data-countdown="2020/12/30" class="countdown">aedfa sdf</div> --}}
+            <div id="clockdiv" class="clock">
+                <i class="fa fa-clock-o"></i>
+                <div class="des-time">
+                    <small id="d" class="hours">00</small>
+                    <div class="smalltext">D</div>
+                </div>
+                <div class="des-time">
+                    <small id="h" class="hours">00</small>
+                    <div class="smalltext">H</div>
+                </div>
+                <div class="des-time">
+                    <small id="m" class="minutes">00</small>
+                    <div class="smalltext">M</div>
+                </div>
+
+                <div class="des-time">
+                    <small id="s" class="seconds">00</small>
+                    <div class="smalltext">S</div>
+                </div>
+            </div>
         </div>
         <div class="owl-carousel owl-theme products_carousel">
             @foreach ($products as $product)
             @if ($product->position == "flash sale")
-
+            <input type="hidden" id="time" value="{{$product->flash_timing}}">
                 <div class="item">
                     <div class="grid_item">
                         @foreach ($product->get_product_avatars as $avtr)
@@ -97,8 +120,8 @@
             @endforeach
         </div>
     </div>
-
-
+    {{-- @endif
+    @endforeach --}}
 
     <div >
         <div class="container margin_30" style="margin-bottom: 1rem;">
@@ -663,6 +686,49 @@
             }
         })
 
+    }
+
+    window.onload = displayClock();
+    function displayClock(){
+        if(document.getElementById("time").value != null){
+            var countDownDate = document.getElementById("time").value;
+        }
+        
+        // Update the count down every 1 second
+        var x = setInterval(function() {
+
+            // Get today's date and time
+            var now = new Date().getTime();
+
+            // Find the distance between now and the count down date
+            var distance = countDownDate - now;
+
+            // Time calculations for days, hours, minutes and seconds
+            var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            $("#d").text(days);
+            $("#h").text(hours);
+            $("#m").text(minutes);
+            $("#s").text(seconds);
+            if (distance < 0) {
+                clearInterval(x);
+                $("#clockdiv").hide();
+                $.ajax({
+                    url: "{{ route('product.flash.update') }}",
+                    type: "POST",
+                    data: {
+                        "_token": "{{ csrf_token() }}"
+                    },
+                    success:function(response)
+                    {
+                        window.location.reload();
+                    }
+                })
+            }
+        }, 1000);
     }
 </script>
 
