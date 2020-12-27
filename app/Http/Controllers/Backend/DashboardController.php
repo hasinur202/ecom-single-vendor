@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
-use App\Models\ShareHolder;
 use Illuminate\Http\Request;
 use App\User;
 use RealRashid\SweetAlert\Facades\Alert;

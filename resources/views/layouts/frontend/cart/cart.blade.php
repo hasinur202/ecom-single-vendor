@@ -58,10 +58,7 @@
                                     <div class="numbers-row">
                                         <input onchange="calculate({{$crt->id}},this.value)" id="qty" name="qty"
                                             type="number" value="{{ $crt->qty }}" class="qty2" required>
-
-                                    <div class="inc button_inc">+</div>
-                                    <div class="dec button_inc">-</div>
-                                </div>
+                                    </div>
                                 </td>
                                 <td>
                                     <strong id="total">{{$crt ? $crt->total : $crt->get_product->sale_price }}</strong>
@@ -147,8 +144,8 @@
                 }else{
                     window.location.reload();
                 }
-                
-               
+
+
             },
             error: function(res) {
                 if (res.status == 404) {
@@ -180,7 +177,7 @@
     }
 
     function searchProduct(){
-        
+
         $.ajax({
             url: "{{ route('search') }}",
             method: "POST",
@@ -198,7 +195,7 @@
                         $("#searchData").html(response);
                         $("#searchData").show();
                     }
-                    
+
                 }else{
                     $("#searchData").fadeOut();
                     $("#searchData1").hide();

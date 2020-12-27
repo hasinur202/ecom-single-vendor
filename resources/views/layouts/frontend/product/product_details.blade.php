@@ -21,9 +21,6 @@
 
 <main>
     <div class="container margin_30">
-        <div class="countdown_inner">
-            If you use share holder token before order any product.You will get extra discount.
-        </div>
         <div class="row">
             <div class="col-md-6">
                 <div class="all">
@@ -70,7 +67,7 @@
                                 <ul>
                                     <li>
                                         <a href="#" class="color color_1 active" style="background-color: {{ $product->color }} !important"></a>
-                                        
+
                                     </li>
                                 </ul>
                             </div>
@@ -81,9 +78,9 @@
 
                                 <div class="custom-select-form">
                                     <select id="size" onchange="priceBySize(this.value,{{$product->id}})" class="wide">
-                                        
+
                                         @foreach ($product->get_attribute as $size)
-                                            <option value="{{ optional($size)->size }}" selected="selected">{{ optional($size)->size }}</option>                         
+                                            <option value="{{ optional($size)->size }}" selected="selected">{{ optional($size)->size }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -175,7 +172,6 @@
         <div class="main_title">
             <h2>Related</h2>
             <span>Products</span>
-            <p>Cum doctus civibus efficiantur in imperdiet deterruisset.</p>
         </div>
         <div class="owl-carousel owl-theme products_carousel">
 
@@ -221,7 +217,7 @@
                         <i class="ti-gift"></i>
                         <div class="justify-content-center">
                             <h3>Free Shipping</h3>
-                            <p>For all oders over $99</p>
+                            <p>For all oders over Tk. 2000</p>
                         </div>
                     </div>
                 </li>

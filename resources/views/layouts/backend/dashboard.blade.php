@@ -6,7 +6,7 @@
     <section class="content-header">
       <div class="container-fluid">
         <div class="row mb-2">
-            
+
             <div class="col-sm-2">
                 <div id="disableDiv" style="width: 100%;
                     padding: 5px;
@@ -34,101 +34,8 @@
 
     <!-- Main content -->
     <section class="content">
-        <div id="showLevel" style="display: none;" class="row">
-            <div class="card card-primary col-4" style="margin-left: 15px; padding-top: 8px;">
-                <div class="card-header" style="background-color: #007bff;
-                color: #fff;">
-                  <h3 class="card-title">Any thing</h3>
-                  <button
-                    type="button"
-                    class="close"
-                    data-dismiss="modal"
-                    aria-label="Close"
-                  >
-                    <span style="color: #fff" aria-hidden="true">&times;</span>
-                  </button>
-                </div>
-              <form>
-                  <input type="hidden" id="token" name="token" value="{{ csrf_token() }}">
-                  <div class="card-body">
-                    <div class="form-group">
-                      <label class="mr-sm-2" for="inlineFormCustomSelect">Level No.</label>
-                      <input
-                        id="cycle_no"
-                        name="cycle_no"
-                        type="text"
-                        class="form-control"
-                        placeholder="Example: 1"
-                      />
-                    </div>
-                    <div class="form-group">
-                        <label class="mr-sm-2" for="inlineFormCustomSelect">Level Value</label>
-                        <input
-                          id="cycle_value"
-                          name="cycle_value"
-                          type="text"
-                          class="form-control"
-                          placeholder="Example: 20"
-                        />
-                      </div>
-                      <div class="form-group">
-                        <label class="mr-sm-2" for="inlineFormCustomSelect">E-Money</label>
-                        <input
-                          id="e_money"
-                          name="e_money"
-                          type="text"
-                          class="form-control"
-                          placeholder="E-Money "
-                        />
-                      </div>
-                      <div class="form-group">
-                        <label class="mr-sm-2" for="inlineFormCustomSelect">Level Wise Commision [%]</label>
-                        <input
-                          id="commision"
-                          name="commision"
-                          type="text"
-                          class="form-control"
-                          placeholder="Example: 10 "
-                        />
-                      </div>
-                  </div>
-                  <button
-                    id="submit"
-                    style="width: 100%"
-                    type="button"
-                    onclick="storeLevel()"
-                    class="btn btn-primary"
-                  >
-                    Submit
-                  </button>
-                </form>
-            </div>
-            <div class="card col-7" style="margin-left: 70px;">
-                <div class="card-header">
-                <h3 class="card-title">Any Thing</h3>
-                </div>
-                <!-- /.card-header -->
-                <div class="card-body">
-                  <table id="example1" class="table table-bordered table-striped">
-                    <thead>
-                    <tr role="row">
-                        <th>SI# </th>
-                        <th>Level No.</th>
-                        <th>Level Value</th>
-                        <th>E-Money</th>
-                        <th>Commision [%]</th>
-                        <th>Action</th>
-                    </tr>
-                    </thead>
-                    <tbody id="tbl">
-                        @include('layouts.backend.dashboardTbl')
-                    </tbody>
-                </table>
-                </div>
-            </div>
-        </div>
 
-        <div id="defaultMode">
+    <div id="defaultMode">
         <div class="card col-lg-5">
             <div class="card-header">
               <h3 class="card-title">Any Thing....</h3>
@@ -157,16 +64,9 @@
                   </li>
 
 
-                  
                   <li class="nav-item">
                     <a href="#" class="nav-link">
                       Level - 0
-
-                      {{-- @php $i=0; @endphp
-                      @foreach ($level_holders->get_share_holders as $share_holder_qty)
-                      @php $i++; @endphp
-
-                      @endforeach --}}
                       <span class="float-right text-success">0</span>
                     </a>
                   </li>

@@ -398,7 +398,7 @@
 
 
 
-    <div class="featured lazy" data-bg="url(assets/img/featured_home.jpg)" style="height: 200px !important">
+    <div class="featured lazy" data-bg="url(assets/img/subscribe-3.jpg)" style="height: 200px !important">
         <div class="opacity-mask d-flex align-items-center" data-opacity-mask="rgba(0, 0, 0, 0.5)">
             <div class="container margin_60">
                 <div class="row justify-content-center justify-content-md-start">
@@ -414,7 +414,6 @@
                                 <button onclick="addSubscriber();" type="submit" id="btnSubmit"><i class="ti-angle-double-right"></i></button>
                             </div>
                         </div>
-                        <span id="statusSubscribe" style="display: none;"></span>
                         </form>
 
                     </div>
@@ -487,7 +486,7 @@
                     title: 'Oops...',
                     text: 'You are not logged in!'
                 })
-                
+
             }
         })
     }
@@ -502,14 +501,18 @@
                 },
                 success:function(resp){
                     if(resp == "exists"){
-                        $("#statusSubscribe").show();
                         $("#btnSubmit").hide();
-                        $("#statusSubscribe").html("Error: Subscriber Email Already Exists.");
-                        $("#statusSubscribe").css({ 'background':'red', 'color':'#fff', 'border-radius':'12px', 'padding':'5px' });
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: 'Subscriber Email Already Exists!'
+                        })
                     }else if(resp == "saved"){
-                        $("#statusSubscribe").show();
-                        $("#statusSubscribe").html("Success: Thanks for Subscribing!");
-                        $("#statusSubscribe").css({ 'background':'green', 'color':'#fff', 'border-radius':'12px', 'padding':'5px' });
+                        Toast.fire({
+                            icon:'success',
+                            title:'Success!',
+                            text:'Thanks for Subscribing!.'
+                        })
                     }
                 },
                 error:function(){
@@ -529,10 +532,13 @@
                 },
                 success:function(resp){
                     if(resp == "exists"){
-                        $("#statusSubscribe").show();
                         $("#btnSubmit").hide();
-                        $("#statusSubscribe").html("Error: Subscriber Email Already Exists.");
-                        $("#statusSubscribe").css({ 'background':'red', 'color':'#fff', 'border-radius':'12px', 'padding':'5px' });
+
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: 'Subscriber Email Already Exists!'
+                        })
                     }
                 },
                 error:function(){
@@ -543,7 +549,6 @@
 
         function enableSubscriber(){
             $("#btnSubmit").show();
-            $("#statusSubscribe").hide();
         }
 
 

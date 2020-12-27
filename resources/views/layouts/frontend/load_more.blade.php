@@ -6,7 +6,7 @@
         $length += 1;
     @endphp
     @if ($product->position == "just for you")
-    <div class="col-6 col-md-4 col-xl-2">
+    <div class="col-4 col-md-4 col-xl-2">
         <div class="grid_item">
             @foreach ($product->get_product_avatars as $avtr)
             <figure>
